@@ -247,10 +247,13 @@
 // const path = require('path');
 // const fs = require('fs');
 
-import PythonShell from 'python-shell'
+import {PythonShell} from 'python-shell'
 import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // exports.predictDiabetes = (req, res) => {
 export const predictDiabetes = (req, res) => {
