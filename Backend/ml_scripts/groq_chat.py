@@ -65,12 +65,38 @@ def is_medical_question(text):
   'prescription', 'nurse', 'clinic', 'therapy', 'vaccination',
   'infection', 'illness', 'virus', 'bacteria', 'condition', 'stress',
   'naturally', 'diet', 'prevention tips', 'sleep', 'cold', 'healthy lifestyle', 
-  'healthy',
-  'consultation', 'recovery', 'chronic', 'acute', 
-  'examination', 'lab tests', 'analysis', 
-  'follow-up', 'referral', 'specialist',
-  'outpatient', 'inpatient', 
-  'wellness', 
+  'healthy','healthy schedule,' 'healthy diet', 'healthy habits', 'healthy food',
+    'healthy exercise', 'healthy sleep', 'healthy mind', 'healthy body', 'healthy heart',
+  'consultation', 'recovery', 'chronic', 'acute', 'emergency', 'urgent', 'appointment',
+  'examination', 'lab tests', 'analysis', 'screening', 'check-up', 'diagnostic','diagnostic tests',
+  'follow-up', 'referral', 'specialist',' bedtime routine','reduce stress','healthy habits',
+  'outpatient', 'inpatient', 'emergency room', 'ambulance', 'paramedic', 'first aid',
+  'wellness', #name all body parts
+    'head', 'neck', 'shoulder', 'arm', 'elbow', 'forearm', 'wrist', 'hand', 'finger', 'thumb',
+    'chest', 'abdomen', 'back', 'hip', 'buttocks', 'groin', 'thigh', 'knee', 'leg', 'ankle', 'foot', 'toe',
+    'heart', 'lungs', 'brain', 'liver', 'kidney', 'stomach', 'intestine', 'bladder', 'uterus', 'ovary', 'testicle',
+    # name basic health conditions and problems
+    'injury', 'fracture', 'sprain', 'strain', 'dislocation', 'concussion', 'wound', 'cut', 'burn', 'bruise', 'bite', 'sting',
+    'bleeding', 'swelling', 'inflammation', 'infection', 'fever', 'rash', 'itch', 'pain', 'numbness', 'tingling', 'weakness', 'fatigue',
+    'dizziness', 'nausea', 'vomiting', 'diarrhea', 'constipation', 'indigestion', 'heartburn', 'cough', 'sneeze', 'wheeze', 'shortness of breath',
+    'chest pain', 'palpitations', 'high blood pressure', 'low blood pressure', 'high cholesterol', 'diabetes', 'asthma', 'allergy', 'anemia',
+    'arthritis', 'osteoporosis', 'cancer', 'infection', 'inflammation', 'autoimmune', 'genetic', 'mental health', 'anxiety', 'depression',
+    'stress', 'insomnia', 'eating disorder', 'addiction', 'alcoholism', 'substance abuse'
+    'vaccine', 'immunization', 'antibiotic', 'antiviral', 'antifungal', 'antiparasitic', 'painkiller', 'anti-inflammatory', 'antacid', 'laxative',
+    'antihistamine', 'decongestant', 'cough syrup', 'antiseptic', 'disinfectant', 'sunscreen', 'insect repellent', 'first aid kit', 'bandage',
+    'band-aid', 'gauze', 'cotton ball', 'tweezers', 'scissors', 'thermometer', 'blood pressure monitor', 'glucose meter', 'inhaler', 'epinephrine',
+    'insulin', 'birth control', 'pregnancy test', 'condom', 'tampon', 'sanitary pad', 'diaper', 'wheelchair', 'crutches', 'hearing aid', 'eyeglasses',
+    'contact lenses', 'cane', 'walker', 'prosthesis', 'orthosis', 'pacemaker', 'defibrillator', 'oxygen tank', 'nasogastric tube', 'catheter', 'stent',
+    'suture', 'staple', 'cast', 'splint', 'brace', 'orthosis', 'prosthesis', 'dialysis machine', 'ventilator', 'CPAP machine', 'IV drip', 'blood bag',
+    #name basic medical procedures
+    'physical exam', 'medical history', 'vital signs', 'blood pressure', 'heart rate', 'respiratory rate', 'temperature', 'BMI', 'pulse oximetry',
+    'blood test', 'urine test', 'stool test', 'biopsy', 'imaging test', 'X-ray', 'CT scan', 'MRI', 'ultrasound', 'endoscopy', 'colonoscopy', 'laparoscopy',
+    
+    'baby', 'infant', 'toddler', 'preschooler', 'school-age child', 'teenager', 'adolescent', 'young adult', 'puberty', 'growth spurt', 'developmental milestone',
+    # name youngsters problems related to health and medical
+    'colic', 'diaper rash', 'teething', 'croup', 'ear infection', 'strep throat', 'bronchiolitis', 'pneumonia', 'gastroenteritis', 'food allergy','food poisoning',
+    'masturbation','sleepwalking', 'night terror', 'nightmare', 'bedwetting', 'picky eating', 'tantrum', 'sibling rivalry', 'bullying', 'peer pressure',
+
   'nutritionist', 
   'prescription refill', 
   'side effects', 
@@ -123,23 +149,24 @@ def get_groq_response(message):
 
         client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
         
-        prompt = f"""You are a medical chatbot. Provide a concise, accurate answer in 40-50 words. 
+        prompt = f"""You are a medical chatbot. Provide a concise, accurate answer in 197 tokens. 
         Only answer medical questions. Focus on being precise and clinically relevant.
         
-        Question: {message}"""
+        Question: {message} . Comment: Provide a concise, accurate answer in 197 tokens."""
         
         chat_completion = client.chat.completions.create(
             messages=[{
                 "role": "system",
-                "content": "You are a medical chatbot. Provide only medical information. Keep answers concise (40-50 words) and clinically relevant."
+                "content": "You are a medical chatbot. Provide only medical information. Keep answers accurate and clinically relevant."
             },
             {
                 "role": "user",
-                "content": message
+                "content": prompt
             }],
             model="mixtral-8x7b-32768",
-            max_tokens=100  # Limit response length
+            max_tokens=200  # Limit response length
         )
+        
         
         return {
             "message": chat_completion.choices[0].message.content,
