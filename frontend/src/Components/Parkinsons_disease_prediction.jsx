@@ -101,3 +101,15 @@ const ParkinsonsPrediction = () => {
 };
 
 export default ParkinsonsPrediction;
+
+
+
+
+
+
+
+
+
+
+
+

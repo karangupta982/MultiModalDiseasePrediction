@@ -282,25 +282,39 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import predictionRoutes from './routes/predictionRoutes.mjs';
 import dotenv from 'dotenv';
-// import groqRoutes from './controllers/groqController.js'; 
-import axios from 'axios';
+import userRoutes from './routes/User.js';
+import profileRoutes from './routes/Profile.js'
+import cookieParser from 'cookie-parser'
+const { cloudinaryConnect } = require("./Configuration/Cloudinary");
+const fileUpload = require("express-fileupload");
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
 
-app.use(express.json());
+
+app.use(
+	fileUpload({
+		useTempFiles: true,
+		tempFileDir: "/tmp/",
+	})
+);
+
+cloudinaryConnect();
 
 
 
 app.use('/api/predict', predictionRoutes);
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 
 
