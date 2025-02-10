@@ -56,23 +56,15 @@ function App() {
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richBlack text-white font-inter " >
         
-        {/* <div className='h-screen w-screen flex justify-center items-center' > */}
-        {/* <Loader /> */}
-        {/* </div> */}
+       
      
       <div >
       <div ref={targetRef}>
         <Navbar />
         <Routes>
-          {/* <Route path="/" element={<LandingPage />} /> */}
+         
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/resources" element={<Resources  />} />
-          <Route path="/resources/:field/:id" element={<FieldPage />} />
-          <Route path="/resources/essentials/:field/:id" element={<Essentials />} />
-          <Route path="courses/:courseId" element={<CourseDetails />} />
-          <Route path="catalog/:catalogName" element={<Catalog />} /> */}
+          
 
           <Route
             path="/login"
@@ -178,31 +170,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
-            {/* <Route path="dashboard/my-profile" element={<MyProfile />} />
-            <Route path="dashboard/Settings" element={<Settings />} /> */}
-            {/* {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-              <>
-                <Route path="dashboard/instructor" element={<Instructor />} />
-                <Route path="dashboard/my-courses" element={<MyCourses />} />
-                <Route path="dashboard/add-course" element={<AddCourse />} />
-                <Route
-                  path="dashboard/edit-course/:courseId"
-                  element={<EditCourse />}
-                />
-              </>
-            )} */}
-            {/* {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-              <>
-                <Route
-                  path="dashboard/enrolled-courses"
-                  element={<EnrolledCourses />}
-                />
-                <Route path="/dashboard/cart" element={<Cart />} />
-              </>
-            )}
-            <Route path="dashboard/settings" element={<Settings />} />
-          </Route> */}
 
             
 
