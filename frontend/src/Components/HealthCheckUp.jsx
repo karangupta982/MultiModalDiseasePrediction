@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Loader from './Loader';
 
 const HealthAssessmentChat = () => {
     const [messages, setMessages] = useState([]);
@@ -130,65 +131,79 @@ const HealthAssessmentChat = () => {
     };
 
     return (
-        <div className="flex flex-col h-[600px] w-full max-w-3xl mx-auto border rounded-lg bg-white shadow-lg">
-            <div className="bg-blue-600 text-white p-4 rounded-t-lg">
-                <h2 className="text-xl font-semibold">Health Assessment</h2>
-                <p className="text-sm">Answer questions about your health</p>
-            </div>
 
-            <div className="flex-1 p-4 overflow-y-auto">
-                {messages.map((message, index) => (
-                    <div
-                        key={index}
-                        className={`mb-4 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}
-                    >
+    //     <div className="fixed inset-0 z-[20] !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
+    //   <div className="w-11/12 max-w-[350px] rounded-lg border border-richblack-400 bg-richblack-800 p-6">
+        
+
+
+
+
+        <div className='relative top-[10vh] right-0 left-0 bottom-0 backdrop-blur-sm  bg-richblack-900 bg-opacity-10'>
+            <div className="flex flex-col h-[700px] w-full max-w-5xl mx-auto border  bg-richblack-800 shadow-lg mt-[8vh] rounded-xl">
+                <div className="bg-richblack-600 rounded-t-xl text-white p-4  text-center">
+                    <h2 className="text-3xl font-thin mb-[0.5vh]">Health Assessment</h2>
+                    <p className="text-sm">Answer questions about your health</p>
+                </div>
+
+                <div className="flex-1 p-4 overflow-y-auto rounded-lg font-medium">
+                    {messages.map((message, index) => (
                         <div
-                            className={`inline-block p-3 rounded-lg max-w-[80%] ${
-                                message.sender === 'user'
-                                    ? 'bg-blue-500 text-white'
-                                    : message.isGreeting
-                                    ? 'bg-yellow-50 border border-yellow-200 text-gray-700'
-                                    : message.isAssessment
-                                    ? 'bg-green-50 border border-green-200 text-gray-700'
-                                    : 'bg-gray-100 text-gray-800'
-                            } ${message.error ? 'bg-red-100' : ''}`}
+                            key={index}
+                            className={`mb-4 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}
                         >
-                            {message.text + '.'}
+                            <div
+                                className={`inline-block p-3 rounded-lg max-w-[80%] ${
+                                    message.sender === 'user'
+                                        ? 'bg-blue-500 text-white'
+                                        : message.isGreeting
+                                        ? 'bg-yellow-50 border border-yellow-200 text-gray-700'
+                                        : message.isAssessment
+                                        ? 'bg-green-50 border border-green-200 text-gray-700'
+                                        : 'bg-white text-gray-800'
+                                } ${message.error ? 'bg-red-600' : ''}`}
+                            >
+                                {message.text + '.'}
+                            </div>
                         </div>
-                    </div>
-                ))}
-                {isLoading && (
-                    <div className="text-center">
-                        <div className="inline-block p-3 bg-gray-100 rounded-lg">
-                            Processing...
+                    ))}
+                    {isLoading && (
+                        <div className="text-center">
+                            <div className="inline-block p-3 bg-white rounded-lg">
+                                <Loader />
+                                {/* <Loader text="Loading..." speed={0.5} /> */}
+                            </div>
                         </div>
-                    </div>
-                )}
-                <div ref={messagesEndRef} />
-            </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                </div>
 
-            {!isAssessmentComplete && currentQuestion < questions.length && (
-                <form onSubmit={handleSubmit} className="p-4 border-t">
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder={questions[currentQuestion]?.text || "Assessment complete"}
-                            className="flex-1 p-2 border rounded"
-                            disabled={isLoading}
-                        />
-                        <button
-                            type="submit"
-                            disabled={isLoading || !input.trim()}
-                            className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 disabled:bg-blue-300"
-                        >
-                            Send
-                        </button>
-                    </div>
-                </form>
-            )}
+                {!isAssessmentComplete && currentQuestion < questions.length && (
+                    <form onSubmit={handleSubmit} className="p-4 border-t">
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                placeholder={questions[currentQuestion]?.text || "Assessment complete"}
+                                className="flex-1 p-2 border rounded text-black text-xl"
+                                disabled={isLoading}
+                            />
+                            <button
+                                type="submit"
+                                disabled={isLoading || !input.trim()}
+                                className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 disabled:bg-blue-300"
+                            >
+                                Send
+                            </button>
+                        </div>
+                    </form>
+                )}
+            </div>
         </div>
+
+
+
     );
 };
 

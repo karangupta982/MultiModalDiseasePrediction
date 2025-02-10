@@ -22,3 +22,7 @@
   }
   
   
+   /* hiding scrollbar */
+ ::-webkit-scrollbar{
+  display: none;
+ }

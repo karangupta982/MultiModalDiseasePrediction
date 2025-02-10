@@ -12,7 +12,7 @@ import {
   resetPassword,
 } from "../controllers/ResetPassword.js";
 
-import { auth } from "../Middleware/Auth";
+import {auth}  from "../Middleware/Auth.js";
 
 router.post("/login", login);
 
@@ -27,4 +27,4 @@ router.post("/reset-password-token", resetPasswordToken);
 router.post("/reset-password", resetPassword);
 router.post("/update-password", resetPassword);
 
-module.exports = router;
+export default router;

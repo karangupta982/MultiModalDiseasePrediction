@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
             ref: 'HeartDiseaseReport',
           
         },
-        parkinsonDiseaesReportId: {
+        parkinsonDiseaseReportId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'ParkinsonsDiseaseReport',
            
@@ -36,11 +36,7 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        additionalDetails: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: "Profile",
-        },
+        
         token: {
             type: String,
         },
@@ -51,8 +47,34 @@ const UserSchema = new mongoose.Schema(
         image: {
             type: String,
         },
+        gender:{
+            type:String
+        },          
+        dateOfBirth:{
+            type:Date,
+        },             
+        disease:{
+            type:String
+        },         
+        allergies:{
+            type:String
+        },
+        
     },
     { timestamps: true }
 )
 
-module.exports = mongoose.model('User',UserSchema);
+const User = mongoose.model('User',UserSchema);
+export default User
+
+
+
+
+
+
+
+
+
+
+
+

@@ -285,8 +285,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/User.js';
 import profileRoutes from './routes/Profile.js'
 import cookieParser from 'cookie-parser'
-const { cloudinaryConnect } = require("./Configuration/Cloudinary");
-const fileUpload = require("express-fileupload");
+import { cloudinaryConnect } from "./Configuration/Cloudinary.js";
+import fileUpload from "express-fileupload";
 
 dotenv.config();
 

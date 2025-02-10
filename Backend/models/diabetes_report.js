@@ -4,19 +4,20 @@ const DiabetesReportSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
 //   type: {
 //     type: String,
 //     // enum: ['diabetes', 'heart', 'parkinsons', 'health-checkup'],
 //     required: true
 //   },
-  result: {
-    prediction: Boolean,
-    confidence: Number,
-    status: String,
-    type: String
-  },
+  // result: {
+  //   prediction: Boolean,
+  //   confidence: Number,
+  //   status: String,
+  //   type: String
+  // },
+  
   pregnancies: {
     type: Number,
     required: true
@@ -50,11 +51,16 @@ const DiabetesReportSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  recommendations: [String],
-  date: {
+  lastChecked:{
     type: Date,
-    default: Date.now
-  }
-});
+    default: Date.now,
+  },
+  outcome: {
+    type: Number,
+    
+  },
+  recommendations: [String],
 
-module.exports = mongoose.model('DiabetesReport', DiabetesReportSchema);
+});
+const DiabetesReport = mongoose.model('DiabetesReport', DiabetesReportSchema);
+export default DiabetesReport

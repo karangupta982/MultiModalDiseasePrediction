@@ -1,11 +1,11 @@
-import User from "../models/UserModel"
-import mailSender from "../Utils/MailSender"
+import User from "../models/UserModel.js"
+import mailSender from "../Utils/MailSender.js"
 import bcrypt from "bcryptjs"
 import crypto from "crypto"
 
 
 
-exports.resetPasswordToken = async (req, res) => {
+export const resetPasswordToken = async (req, res) => {
   try {
     const email = req.body.email
     const user = await User.findOne({ email: email })
@@ -50,7 +50,7 @@ exports.resetPasswordToken = async (req, res) => {
   }
 }
 
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
   try {
     const { password, confirmPassword, token } = req.body
 

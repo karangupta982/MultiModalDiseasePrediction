@@ -7,15 +7,64 @@ import {PythonShell} from 'python-shell'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url';
+import ParkinsonsDiseaseReport from '../models/parkinson_disease_report.js'
+import User from '../models/UserModel.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
 // exports.predictParkinsonDisease = (req, res) => {
-export const predictParkinsonDisease = (req, res) => {
+export const predictParkinsonDisease = async (req, res) => {
+  try{
   const inputFeatures = req.body.features;
   console.log('inputFeatures:', inputFeatures);
+
+    const id = req.user.id;
+    console.log('User ID:', id);
+
+    // Fetch User & Diabetes Report
+    const userDetails = await User.findById(id);
+    if (!userDetails) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    console.log('User Details:', userDetails);
+
+    const parkinsonReport = await ParkinsonsDiseaseReport.findById(userDetails.parkinsonDiseaseReportId);
+    if (!parkinsonReport) {
+      return res.status(404).json({ error: 'Diabetes report not found' });
+    }
+
+    // Update diabetes report with input values
+    [
+      parkinsonReport.MDVP_Fo_Hz,
+      parkinsonReport.MDVP_Fhi_Hz,
+      parkinsonReport.MDVP_Flo_Hz,
+      parkinsonReport.MDVP_Jitter_,
+      parkinsonReport.MDVP_RAP,
+      parkinsonReport.MDVP_PPQ,
+      parkinsonReport.Jitter_DDP,
+      parkinsonReport.MDVP_Shimmer,
+      parkinsonReport.MDVP_Shimmer_dB,
+      
+
+      parkinsonReport.Shimmer_APQ3,
+      parkinsonReport.Shimmer_APQ5,
+      parkinsonReport.MDVP_APQ,
+      parkinsonReport.Shimmer_DDA,
+      parkinsonReport.NHR,
+      parkinsonReport.HNR,
+      parkinsonReport.RPDE,
+      parkinsonReport.DFA,
+      parkinsonReport.Spread1,
+
+
+      parkinsonReport.Spread2,
+      parkinsonReport.D2,
+      parkinsonReport.PPE,
+    ] = inputFeatures;
+
+    parkinsonReport.lastChecked = Date.now();
 
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/parkinsons_prediction.py');
@@ -51,14 +100,14 @@ export const predictParkinsonDisease = (req, res) => {
     console.error('Python stderr:', data);
   });
 
-  pyshell.end((err, code, signal) => {
-    if (err) {
-      console.error('Python Shell Error:', err);
-      return res.status(500).json({ 
-        error: 'Failed to execute Python script', 
-        details: err.message 
-      });
-    }
+  pyshell.end(async (err, code, signal) => {
+      if (err) {
+        console.error('Python Shell Error:', err);
+        return res.status(500).json({ 
+          error: 'Failed to execute Python script', 
+          details: err.message 
+        });
+      }
     
     console.log('Python script completed with code:', code);
     try {
@@ -69,13 +118,30 @@ export const predictParkinsonDisease = (req, res) => {
       if (prediction.error) {
         throw new Error(prediction.error);
       }
+
       console.log('Parsed prediction:', prediction);
+
+      parkinsonReport.outcome = prediction.prediction;
+      await parkinsonReport.save();  // ✅ Save the report AFTER getting the prediction
+
+      // ✅ Fetch updated user details after saving
+      const updatedUserDetails = await User.findById(id)
+      .populate("diabetesReportId")
+      .populate("heartDiseaseReportId")
+      .populate("parkinsonDiseaseReportId")
+      .exec();
+
       res.json({ 
         prediction: prediction.prediction,
-        success: true 
+        success: true,
+        updatedUserDetails 
       });
     } catch (parseError) {
       console.error('Parsing Error:', parseError);
+      parkinsonReport.outcome = -1;
+      await parkinsonReport.save();  // ✅ Save even if there's an error (outcome = -1)
+
+
       res.status(500).json({ 
         error: 'Failed to parse prediction result', 
         details: parseError.message,
@@ -83,4 +149,8 @@ export const predictParkinsonDisease = (req, res) => {
       });
     }
   });
+  } catch (error) {
+    console.error('Unexpected Error:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
 };

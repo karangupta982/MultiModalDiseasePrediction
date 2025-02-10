@@ -197,13 +197,17 @@
 
 
 
-import { User, Mail, Calendar, Activity, AlertTriangle } from "lucide-react"
+import { User, Mail, Calendar, Activity, AlertTriangle, Pencil } from "lucide-react"
+import ImageModal from "../ImageModal"
 import { useSelector } from "react-redux"
+import { useState } from "react"
 
 const UserProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const {user} = useSelector((state) => state.profile)
 
+  console.log("user from userDatafile:",user);
   const userData = {
     firstName: user?.firstName || "John",
     lastName: user?.lastName || "Doe",
@@ -233,6 +237,9 @@ const UserProfile = () => {
                   className="w-36 h-36 rounded-full border-4 border-white shadow-2xl transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg" />
+                {/* <img src={Edit} alt="" className="forced-color-adjust-auto absolute top-2 text-black w-4 h-4" /> */}
+                {/* <Pencil className="cursor-pointer translate-y-[2vh]" /> */}
+                <Pencil className="cursor-pointer translate-y-[2vh]" onClick={() => setIsModalOpen(true)}/>
               </div>
             </div>
           </div>
@@ -269,6 +276,8 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+
+      {isModalOpen && (<ImageModal setIsModalOpen={setIsModalOpen}/>)}
     </div>
   )
 }

@@ -1,18 +1,21 @@
 import bcrypt from "bcryptjs";
-import User from "../models/UserModel";
-import OTP from "../models/OTP";
+import User from "../models/UserModel.js";
+import OTP from "../models/OTP.js";
 import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
-import mailSender from "../Utils/MailSender";
-import Profile from "../models/Profile";
+import mailSender from "../Utils/MailSender.js";
+// import Profile from "../models/Profile.js";
 import dotenv from "dotenv";
+import DiabetesReport from "../models/diabetes_report.js";
+import HeartDiseaseReport from '../models/HeartDisease_report.js'
+import ParkinsonsDiseaseReport from '../models/parkinson_disease_report.js'
 
 
 
 
 dotenv.config();
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const {
       firstName,
@@ -20,8 +23,10 @@ exports.signup = async (req, res) => {
       email,
       password,
       confirmPassword,
-      // accountType,
-      // contactNumber,
+      gender,          
+      dateOfBirth,             
+      disease,         
+      allergies,
       otp,
     } = req.body;
 
@@ -31,7 +36,11 @@ exports.signup = async (req, res) => {
       !email ||
       !password ||
       !confirmPassword ||
-      !otp
+      !otp ||
+      !gender ||
+      !dateOfBirth ||
+      !disease ||
+      !allergies
     ) {
       return res.status(403).send({
         success: false,
@@ -84,27 +93,100 @@ exports.signup = async (req, res) => {
     // approved === "Instructor" ? (approved = false) : (approved = true);
 
     // console.log("approaved :", approved);
-    const profileDetails = await Profile.create({
-      gender: null,
-      dateOfBirth: null,
-      about: null,
-      contactNumber: null,
+    const diabetesDetails = await DiabetesReport.create({
+      pregnancies: 0,
+      glucose: 0,
+      bloodPressure: 0,
+      skinThickness: 0,
+      insulin: 0,
+      bmi: 0,
+      diabetesPedigreeFunction: 0,
+      age: 0,
+      lastChecked:Date.now(),
+      outcome: -1,
+    })
+
+    const heartDiseaseDetails = await HeartDiseaseReport.create({
+      age:0,
+      sex: 0,
+      chestPainTypes: 0,
+      restingBloodPressure: 0,
+      serumCholestoral: 0,
+      fastingBloodSugar: 0,
+      restingECGResults: 0,
+      maxHeartRate: 0,
+      exerciseInducedAngina: 0,
+      stDepressionExercise: 0,
+
+      slopeOfPeakExerciseSTSegment: 0,
+      majorVesselsColoredByFluoroscopy: 0,
+      thalStatus: 0,
+      lastChecked:Date.now(),
+      outcome:-1,
+
     });
+
+    const parkinsonDiseaseReport = await ParkinsonsDiseaseReport.create({
+      'MDVP_Fo_Hz': 0,
+      'MDVP_Fhi_Hz': 0,
+      'MDVP_Flo_Hz': 0,
+      'MDVP_Jitter_%': 0,
+      'MDVP_Jitter_Abs': 0,
+      'MDVP_RAP': 0,
+      'MDVP_PPQ': 0,
+      'Jitter_DDP': 0,
+      'MDVP_Shimmer': 0,
+      'MDVP_Shimmer_dB': 0,
+      'Shimmer_APQ3': 0,
+      'Shimmer_APQ5': 0,
+      'MDVP_APQ': 0,
+      'Shimmer_DDA': 0,
+      'NHR': 0,
+      'HNR': 0,
+      'RPDE': 0,
+      'DFA': 0,
+      'Spread1': 0,
+      'Spread2': 0,
+      'D2': 0,
+      'PPE': 0,
+      lastChecked:Date.now(),
+      outcome:-1,
+
+    })
+    // const profileDetails = await Profile.create({
+    //   gender: null,
+    //   dateOfBirth: null,
+    //   about: null,
+    //   contactNumber: null,
+    // });
     const user = await User.create({
       firstName,
       lastName,
       email,
       // contactNumber,
       password: hashedPassword,
+      diabetesReportId:diabetesDetails._id,
+      heartDiseaseReportId:heartDiseaseDetails._id,
+      parkinsonDiseaseReportId:parkinsonDiseaseReport._id,
+
       // accountType: accountType,
       // approved: approved,
-      additionalDetails: profileDetails._id,
+      // additionalDetails: profileDetails._id,
       image: "",
+      gender,          
+      dateOfBirth,             
+      disease,         
+      allergies,
     });
-
+    
+    const newUser = await User.findById(user._id)
+  .populate("diabetesReportId")
+  .populate("heartDiseaseReportId")
+  .populate("parkinsonDiseaseReportId")
+  .exec();
     return res.status(200).json({
       success: true,
-      user,
+      user : newUser,
       message: "User registered successfully",
     });
   } catch (error) {
@@ -116,7 +198,9 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+// export default signup
+
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -127,7 +211,11 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).populate("additionalDetails");
+    const user = await User.findOne({ email }).populate("diabetesReportId")
+    .populate("heartDiseaseReportId")
+    .populate("parkinsonDiseaseReportId")
+    .exec();
+    // const user = await User.findOne({ email }).populate("additionalDetails");
 
     if (!user) {
       return res.status(401).json({
@@ -204,7 +292,9 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.sendotp = async (req, res) => {
+// export default login
+
+export const sendotp = async (req, res) => {
   try {
     const { email } = req.body;
       // console.log("email extracted from req.body",email)
@@ -245,8 +335,9 @@ exports.sendotp = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+// export default sendotp
 
-exports.changePassword = async (req, res) => {
+export const changePassword = async (req, res) => {
   try {
     const userDetails = await User.findById(req.user.id);
 
@@ -300,3 +391,7 @@ exports.changePassword = async (req, res) => {
     });
   }
 };
+
+// export default changePassword
+
+

@@ -106,7 +106,7 @@ const HeartDiseasePrediction = () => {
             onChange={handleInputChange}
             required
           >
-            <option value="">Fasting Blood Sugar > 120 mg/dl</option>
+            <option value="">Fasting Blood Sugar more than 120 mg/dl</option>
             <option value="0">No</option>
             <option value="1">Yes</option>
           </select>

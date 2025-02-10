@@ -7,6 +7,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        richBlack: '#010B13',
+        accentTeal: '#2DD4BF',
+        accentGold: '#FACC15',
+        lightGray: '#F3F4F6',
+        accentRed: '#DC2626',
+        'custom-blue': '#4338ca',
+        richBlack: '#010B13',
+        accentCoral: '#FF6B6B',
+        accentSky: '#7ED6DF',
+        lightGray: '#F3F4F6',
+        richBlack: '#010B13',
+        accentPurple: '#9333EA',
+        // accentTeal: '#2DD4BF',
+        // lightGray: '#F3F4F6',
         richblack: {
           5: "#F1F2FF",
           25: "#DBDDEA",
@@ -98,5 +112,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate",'@tailwindcss/forms')],
 }

@@ -4,72 +4,72 @@ const parkinsonsPredictionSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        // required: true
     },
     // type: {
     //     type: String,
     //     // enum: ['diabetes', 'heart', 'parkinsons', 'health-checkup'],
     //     required: true
     // },
-    result: {
-        prediction: Boolean,
-        confidence: Number,
-        status: String,
-        type: String
-    },
-    'MDVP:Fo(Hz)': {
+    // result: {
+    //     prediction: Boolean,
+    //     confidence: Number,
+    //     status: String,
+    //     type: String
+    // },
+    'MDVP_Fo_Hz': {
         type: Number,
         required: true
     },
-    'MDVP:Fhi(Hz)': {
+    'MDVP_Fhi_Hz': {
         type: Number,
         required: true
     },
-    'MDVP:Flo(Hz)': {
+    'MDVP_Flo_Hz': {
         type: Number,
         required: true
     },
-    'MDVP:Jitter(%)': {
+    'MDVP_Jitter_%': {
         type: Number,
         required: true
     },
-    'MDVP:Jitter(Abs)': {
+    'MDVP_Jitter_Abs': {
         type: Number,
         required: true
     },
-    'MDVP:RAP': {
+    'MDVP_RAP': {
         type: Number,
         required: true
     },
-    'MDVP:PPQ': {
+    'MDVP_PPQ': {
         type: Number,
         required: true
     },
-    'Jitter:DDP': {
+    'Jitter_DDP': {
         type: Number,
         required: true
     },
-    'MDVP:Shimmer': {
+    'MDVP_Shimmer': {
         type: Number,
         required: true
     },
-    'MDVP:Shimmer(dB)': {
+    'MDVP_Shimmer_dB': {
         type: Number,
         required: true
     },
-    'Shimmer:APQ3': {
+    'Shimmer_APQ3': {
         type: Number,
         required: true
     },
-    'Shimmer:APQ5': {
+    'Shimmer_APQ5': {
         type: Number,
         required: true
     },
-    'MDVP:APQ': {
+    'MDVP_APQ': {
         type: Number,
         required: true
     },
-    'Shimmer:DDA': {
+    'Shimmer_DDA': {
         type: Number,
         required: true
     },
@@ -106,14 +106,18 @@ const parkinsonsPredictionSchema = new mongoose.Schema({
         required: true
     },
     recommendations: [String],
-    date: {
-      type: Date,
-      default: Date.now
-    }
+    lastChecked:{
+        type: Date,
+        default: Date.now,
+    },
+    outcome: {
+        type: Number,
+    },
 });
 
 // Create the model
-module.exports =  mongoose.model('ParkinsonsDiseaseReport', parkinsonsPredictionSchema);
+const ParkinsonsDiseaseReport=  mongoose.model('ParkinsonsDiseaseReport', parkinsonsPredictionSchema);
+export default ParkinsonsDiseaseReport
 
 
 

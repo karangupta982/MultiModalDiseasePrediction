@@ -36,15 +36,56 @@ import {PythonShell} from 'python-shell'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url';
+import HeartDiseaseReport from '../models/HeartDisease_report.js'
+import User from '../models/UserModel.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
 // exports.predictHeartDisease = (req, res) => {
-export const predictHeartDisease = (req, res) => {
+export const predictHeartDisease = async (req, res) => {
+  try{
   const inputFeatures = req.body.features;
   console.log('inputFeatures:', inputFeatures);
+
+  const id = req.user.id;
+    console.log('User ID:', id);
+
+    // Fetch User & Diabetes Report
+    const userDetails = await User.findById(id);
+    if (!userDetails) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    console.log('User Details:', userDetails);
+
+    const heartDiseaseReport = await HeartDiseaseReport.findById(userDetails.heartDiseaseReportId);
+    if (!heartDiseaseReport) {
+      return res.status(404).json({ error: 'Heart Disease report not found' });
+    }
+
+    // Update diabetes report with input values
+    [
+      heartDiseaseReport.age,
+      heartDiseaseReport.sex,
+      heartDiseaseReport.chestPainTypes,
+      heartDiseaseReport.restingBloodPressure,
+      heartDiseaseReport.serumCholestoral,
+      heartDiseaseReport.fastingBloodSugar,
+      heartDiseaseReport.restingECGResults,
+      heartDiseaseReport.maxHeartRate,
+      heartDiseaseReport.exerciseInducedAngina,
+      heartDiseaseReport.stDepressionExercise,
+      heartDiseaseReport.slopeOfPeakExerciseSTSegment,
+      heartDiseaseReport.majorVesselsColoredByFluoroscopy,
+      heartDiseaseReport.thalStatus,
+    ] = inputFeatures;
+
+    heartDiseaseReport.lastChecked = Date.now();
+
+
+
+
 
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/heart_disease_prediction.py');
@@ -80,7 +121,7 @@ export const predictHeartDisease = (req, res) => {
     console.error('Python stderr:', data);
   });
 
-  pyshell.end((err, code, signal) => {
+  pyshell.end(async (err, code, signal) => {
     if (err) {
       console.error('Python Shell Error:', err);
       return res.status(500).json({ 
@@ -99,12 +140,29 @@ export const predictHeartDisease = (req, res) => {
         throw new Error(prediction.error);
       }
       console.log('Parsed prediction:', prediction);
+
+      heartDiseaseReport.outcome = prediction.prediction;
+      await heartDiseaseReport.save();  // ✅ Save the report AFTER getting the prediction
+
+      // ✅ Fetch updated user details after saving
+      const updatedUserDetails = await User.findById(id)
+      .populate("diabetesReportId")
+      .populate("heartDiseaseReportId")
+      .populate("parkinsonDiseaseReportId")
+      .exec();
+
+
       res.json({ 
         prediction: prediction.prediction,
-        success: true 
+        success: true,
+        updatedUserDetails
       });
     } catch (parseError) {
       console.error('Parsing Error:', parseError);
+      heartDiseaseReport.outcome = -1;
+      await heartDiseaseReport.save();  // ✅ Save even if there's an error (outcome = -1)
+
+
       res.status(500).json({ 
         error: 'Failed to parse prediction result', 
         details: parseError.message,
@@ -112,5 +170,10 @@ export const predictHeartDisease = (req, res) => {
       });
     }
   });
+  }catch (error) {
+    console.error('Unexpected Error:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+  
 };
 

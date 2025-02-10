@@ -138,17 +138,17 @@ export default function SignUpForm() {
     <div className="relative min-h-screen">
       <div ref={mountRef} className="absolute inset-0 z-0" />
       <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="  p-8  shadow-xl max-w-[25vw] 
+        <div className="  p-8  shadow-xl max-w-[30vw] mt-[10vh]
 h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-none bg-opacity-50 border border-gray-100
 ">
-          <h1 className=" font-bold  text-center text-white text-4xl mb-[4vh]">Sign Up</h1>
+          <h1 className=" font-bold  text-center text-white text-4xl mb-[4vh] ">Sign Up</h1>
 
 
             <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-[2.5vh]">
 
 
-              <div className="flex gap-x-4 ">
-                <label>
+              <div className="flex gap-x-4 justify-between ">
+                <label className="w-full">
                   <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
                     First Name <sup className="">*</sup>
                   </p>
@@ -159,10 +159,10 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     value={firstName}
                     onChange={handleOnChange}
                     placeholder="Enter first name"
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full text-black font-[600] text-black font-[600]"
                   />
                 </label>
-                <label>
+                <label className="w-full">
                   <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
                     Last Name <sup className="">*</sup>
                   </p>
@@ -173,7 +173,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     value={lastName}
                     onChange={handleOnChange}
                     placeholder="Enter last name"
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full text-black font-[600]"
                   />
                 </label>
               </div>
@@ -190,7 +190,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                   value={email}
                   onChange={handleOnChange}
                   placeholder="Enter email address"
-                  className="form-style w-full px-[1vw] py-[1vh] rounded-full"
+                  className="form-style w-full px-[1vw] py-[1vh] rounded-full text-black font-[600]"
                 />
               </label>
 
@@ -205,7 +205,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     name="gender"
                     value={gender}
                     onChange={handleOnChange}
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full text-black font-[600]"
                   >
                     <option value="" disabled>Select your gender</option>
                     <option value="male">Male</option>
@@ -225,7 +225,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     name="dateOfBirth"
                     value={dateOfBirth}
                     onChange={handleOnChange}
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full text-black font-[600]"
                   />
                 </label>
              </div>
@@ -242,7 +242,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                   value={disease}
                   onChange={handleOnChange}
                   placeholder="Enter disease name"
-                  className="form-style w-full px-[1vw] py-[1vh] rounded-full"
+                  className="form-style w-full px-[1vw] py-[1vh] rounded-full text-black font-[600]"
                 />
               </label>
 
@@ -259,12 +259,12 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                   value={allergies}
                   onChange={handleOnChange}
                   placeholder="Enter any allergies"
-                  className="form-style w-full px-[1vw] py-[1vh] rounded-full"
+                  className="form-style w-full px-[1vw] py-[1vh] rounded-full text-black font-[600]"
                 />
               </label>
 
               <div className="flex gap-x-4">
-                <label className="relative">
+                <label className="relative w-full">
                   <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
                     Create Password <sup className="">*</sup>
                   </p>
@@ -275,7 +275,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     value={password}
                     onChange={handleOnChange}
                     placeholder="Enter Password"
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full text-black font-[600]"
                   />
                   <span
                     onClick={() => setShowPassword((prev) => !prev)}
@@ -288,7 +288,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     )}
                   </span>
                 </label>
-                <label className="relative">
+                <label className="relative w-full">
                   <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
                     Confirm Password <sup className="">*</sup>
                   </p>
@@ -299,7 +299,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     value={confirmPassword}
                     onChange={handleOnChange}
                     placeholder="Confirm Password"
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-r-full text-black font-[600]"
                   />
                   <span
                     onClick={() => setShowConfirmPassword((prev) => !prev)}

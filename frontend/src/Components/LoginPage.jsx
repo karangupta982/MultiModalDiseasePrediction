@@ -145,7 +145,7 @@ export default function LoginForm() {
                 value={email}
                 onChange={handleOnChange}
                 placeholder="Enter email address"
-                className="form-style w-full px-[1.5vw] py-[1vh] rounded-full"
+                className="form-style w-full px-[1.5vw] py-[1vh] rounded-full text-black font-[600]"
                 />
             </label>
             <label className="relative">
@@ -159,7 +159,9 @@ export default function LoginForm() {
                 value={password}
                 onChange={handleOnChange}
                 placeholder="Enter Password"
-                className="form-style w-full px-[1.5vw] py-[1vh] rounded-full"
+                className="form-style w-full px-[1.5vw] py-[1vh] rounded-full text-black font-[600]"
+                style={{ '-ms-reveal': 'none' }}
+                
                 />
                 <span
                 onClick={() => setShowPassword((prev) => !prev)}

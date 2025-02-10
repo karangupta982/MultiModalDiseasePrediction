@@ -4,19 +4,19 @@ const heartDiseasePredictionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
 //   type: {
 //     type: String,
 //     // enum: ['diabetes', 'heart', 'parkinsons', 'health-checkup'],
 //     required: true
 //   },
-  result: {
-    prediction: Boolean,
-    confidence: Number,
-    status: String,
-    type: String
-  },
+  // result: {
+  //   prediction: Boolean,
+  //   confidence: Number,
+  //   status: String,
+  //   type: String
+  // },
   age: {
     type: Number,
     required: true
@@ -79,10 +79,14 @@ const heartDiseasePredictionSchema = new mongoose.Schema({
     required: true
   },
   recommendations: [String],
-  date: {
+  lastChecked:{
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+  outcome: {
+    type: Number,
+  },
 });
 
-module.exports = mongoose.model('HeartDiseaseReport', heartDiseasePredictionSchema);
+const HeartDiseaseReport =  mongoose.model('HeartDiseaseReport', heartDiseasePredictionSchema);
+export default HeartDiseaseReport

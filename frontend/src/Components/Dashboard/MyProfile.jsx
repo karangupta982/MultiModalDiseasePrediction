@@ -20,7 +20,7 @@ const navigate = useNavigate();
 // const { user } = useSelector(state => state.profile)
 
   return (
-    <div className=' ' >
+    <div className=' mt-[14vh]' >
     {/* <div className='bg-slate-900 text-white mx-0 md:mx-5' > */}
       {/* <h1 className='font-medium text-richblack-5 text-3xl mb-7 md:mb-14' >My Profile</h1> */}
 {/* 

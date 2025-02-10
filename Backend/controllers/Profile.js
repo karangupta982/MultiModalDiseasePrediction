@@ -1,13 +1,13 @@
-import Profile from "../models/Profile";
-import User from "../models/UserModel";
-import { uploadImageToCloudinary } from "../Utils/ImageUploader";
+import Profile from "../models/Profile.js";
+import User from "../models/UserModel.js";
+import { uploadImageToCloudinary } from "../Utils/ImageUploader.js";
 import mongoose from "mongoose";
 
 
 
 
 
-exports.updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
     try {
       const {
         firstName = "",
@@ -56,7 +56,7 @@ exports.updateProfile = async (req, res) => {
 
 
   
-  exports.deleteAccount = async (req, res) => {
+  export const deleteAccount = async (req, res) => {
     try {
       const id = req.user.id;
       // console.log(id);
@@ -97,7 +97,7 @@ exports.updateProfile = async (req, res) => {
 
 
 
-  exports.updateDisplayPicture = async (req, res) => {
+  export const updateDisplayPicture = async (req, res) => {
     try {
       const displayPicture = req.files.displayPicture;
       const userId = req.user.id;
@@ -107,7 +107,7 @@ exports.updateProfile = async (req, res) => {
         1000,
         1000
       );
-      // console.log(image);
+      console.log(image);
       const updatedProfile = await User.findByIdAndUpdate(
         { _id: userId },
         { image: image.secure_url },
@@ -125,3 +125,84 @@ exports.updateProfile = async (req, res) => {
       });
     }
   };
+
+
+
+
+  export const getAllUserDetails = async (req, res) => {
+    try {
+      const id = req.user.id;
+      const userDetails = await User.findById(id)
+      .populate('diabetesReportId', 'heartDiseaseReportId', 'parkinsonDiseaesReportId')
+      .exec();
+      
+        // .populate("additionalDetails")
+        // .exec();
+      console.log(userDetails);
+      res.status(200).json({
+        success: true,
+        message: "User Data fetched successfully",
+        data: userDetails,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // pregnancies: {
+  //   type: Number,
+  //   required: true
+  // },
+  // glucose: {
+  //   type: Number,
+  //   required: true
+  // },
+  // bloodPressure: {
+  //   type: Number,
+  //   required: true
+  // },
+  // skinThickness: {
+  //   type: Number,
+  //   required: true
+  // },
+  // insulin: {
+  //   type: Number,
+  //   required: true // Not marked as required since it can be optional
+  // },
+  // bmi: {
+  //   type: Number,
+  //   required: true,
+  //   min: 0 // Optional validation to ensure BMI is non-negative
+  // },
+  // diabetesPedigreeFunction: {
+  //   type: Number,
+  //   required: true // Not marked as required since it can be optional
+  // },
+  // age: {
+  //   type: Number,
+  //   required: true
+  // },
+  // lastChecked:{
+  //   type: Date,
+  //   default: Date.now,
+  // },
+  // outcome: {
+  //   type: String,
+  //   required: true
+  // },
+  // recommendations: [String],

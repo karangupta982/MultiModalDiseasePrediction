@@ -5,8 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
-exports.auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
 	try {
 		
 		const token =
@@ -22,7 +21,8 @@ exports.auth = async (req, res, next) => {
 		try {
 			
 			const decode = await jwt.verify(token, process.env.JWT_SECRET);
-			console.log(decode);
+			console.log("decode",decode);  
+			// decode contains email, id=user._id
 			
 			req.user = decode;
 		} catch (error) {
@@ -41,3 +41,6 @@ exports.auth = async (req, res, next) => {
 		});
 	}
 };
+
+
+// export default auth

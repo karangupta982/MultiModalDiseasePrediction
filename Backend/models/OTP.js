@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import mailSender from "../Utils/MailSender";
-import emailTemplate from "../MailTemplate/EmailVerification";
+import mailSender from "../Utils/MailSender.js";
+import emailTemplate from "../MailTemplate/EmailVerification.js";
 
 
 
@@ -40,4 +40,5 @@ OTPSchema.pre("save", async function (next) {
 
 const OTP = mongoose.model("OTP", OTPSchema);
 
-module.exports = OTP;
+// module.exports = OTP;
+export default OTP

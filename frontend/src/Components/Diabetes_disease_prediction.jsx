@@ -25,6 +25,12 @@ const DiabetesPrediction = () => {
 
   const predictDiabetes = async (e) => {
     e.preventDefault();
+
+    
+
+
+
+
     try {
         console.log("calling api call for Diabetes disease prediction"); 
       const response = await axios.post('http://localhost:5000/api/predict/diabetes', { 

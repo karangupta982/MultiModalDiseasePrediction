@@ -1,20 +1,20 @@
 import express from "express";
 const router = express.Router();
-import { auth } from "../Middleware/Auth";
+import { auth } from "../Middleware/Auth.js";
 import {
   deleteAccount,
   updateProfile,
-//   getAllUserDetails,
+  getAllUserDetails,
   updateDisplayPicture,
 //   getEnrolledCourses,
 //   instructorDashboard,
-} from "../controllers/Profile";
+} from "../controllers/Profile.js";
 
 router.delete("/deleteProfile", auth, deleteAccount);
 router.put("/updateProfile", auth, updateProfile);
-// router.get("/getUserDetails", auth, getAllUserDetails);
+router.get("/getUserDetails", auth, getAllUserDetails);
 // router.get("/getEnrolledCourses", auth, getEnrolledCourses);
 router.put("/updateDisplayPicture", auth, updateDisplayPicture);
 // router.get("/instructorDashboard", auth, isInstructor, instructorDashboard);
 
-module.exports = router;
+export default router;
