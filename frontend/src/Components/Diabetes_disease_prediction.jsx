@@ -33,7 +33,7 @@ const DiabetesPrediction = () => {
 
     try {
         console.log("calling api call for Diabetes disease prediction"); 
-      const response = await axios.post('http://localhost:5000/api/predict/diabetes', { 
+      const response = await axios.post('https://predictcareai.onrender.com/api/predict/diabetes', { 
         features: Object.values(features) 
       });
       
