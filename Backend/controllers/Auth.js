@@ -65,14 +65,7 @@ export const signup = async (req, res) => {
     }
 
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    
-// This method sorts the results of the query. The argument { createdAt: -1 } specifies that the 
-// results should be sorted in descending order based on the createdAt field. This means the most 
-// recently created documents will come first.
-// .limit(1):
-// The limit(1) method restricts the number of documents returned by the query to just one. This is
-//  useful when you only want the latest entry (in this case, the most recent OTP associated with the
-//  specified email).
+ 
 
     console.log(response);
     if (!response.length) {
@@ -240,35 +233,6 @@ export const login = async (req, res) => {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
-
-      //jab bhi koi user login karta h then server creates a jwt token and give this 
-// token to client as a response and says to client that jab bhi koi request maroge 
-// isi token ki info ke sath maarna authenticity proof ho jayegi
-
-// cookie is stored in client side and session is stored in server side
-// cookie hyjacking , token hyjecking
-
-// cookie is jjust used to identify user ,it stores session id ,last page pe kys kys click
-// kiya ,konsa product visit kiya and kis kis cheeg pe store karne ke liye code kiya h 
-// wo sab store ho jata h, and ye cookie browser me store ho jati h, size of cookie 
-//is 4kb, session server pe banta and session id only cookie me store ho jati h, sare pages jo run kar
-// rhe h wo sare pages stateless h unpages ke beech me state maintain ke liye session ka use karte h
-
-// session storage me jab tak browser open h tab tak
-
-
-// while both cookies and tokens can be used for authentication, cookies offer several advantages 
-// in terms of security, ease of use, and automatic handling by browsers. They are particularly 
-// beneficial in traditional web applications that require stateful sessions. Sending tokens in the
-//  body can be useful in certain scenarios, such as APIs where stateless authentication is preferred,
-//  but it requires more careful handling to ensure security.
-
-
-// cookie(cookie name, data of cookie, options like validity)
-  // here passing token as a cookie
-
-  // here we can get token via req.cookies.token
-
 
       res.cookie("token", token, options).status(200).json({
         success: true,

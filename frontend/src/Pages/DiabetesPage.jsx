@@ -1,153 +1,8 @@
-// import React from 'react';
-
-// // Diabetes Page
-// function DiabetesPage() {
-//   return (
-//     <div className="bg-gray-900 text-white min-h-screen px-6 py-10">
-//       <div className="max-w-7xl mx-auto">
-//         <h1 className="text-4xl font-bold text-center mb-8">Understanding Diabetes</h1>
-//         <p className="text-lg leading-relaxed mb-6">
-//           Diabetes is a chronic condition that affects how your body turns food into energy. There
-//           are two main types: <strong>Type 1</strong> and <strong>Type 2</strong>. While Type 1 is
-//           often diagnosed in children and young adults, Type 2 is more common in adults and linked
-//           to lifestyle factors.
-//         </p>
-//         <img
-//           src="https://via.placeholder.com/800x400"
-//           alt="Diabetes awareness"
-//           className="rounded-xl mx-auto mb-6"
-//         />
-//         <h2 className="text-2xl font-semibold mb-4">Symptoms of Diabetes</h2>
-//         <ul className="list-disc list-inside mb-6">
-//           <li>Increased thirst and hunger</li>
-//           <li>Frequent urination</li>
-//           <li>Fatigue and blurred vision</li>
-//           <li>Slow-healing wounds</li>
-//         </ul>
-//         <h2 className="text-2xl font-semibold mb-4">Prevention and Management</h2>
-//         <p className="text-lg leading-relaxed">
-//           Healthy eating, regular exercise, and routine health checkups are essential for managing
-//           diabetes and reducing risks.
-//         </p>
-//         <button className="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-full mt-6">
-//           Learn More
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DiabetesPage
-
-// // Heart Disease Page
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // DiabetesPage.jsx  by Deepseek
-// import { Canvas } from '@react-three/fiber'
-// import { OrbitControls, Sphere } from '@react-three/drei'
-
-// const DiabetesPage = () => {
-//   return (
-//     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-//       {/* Hero Section */}
-//       <section className="relative h-96">
-//         <Canvas className="absolute top-0 left-0 w-full h-96">
-//           <ambientLight intensity={0.5} />
-//           {/* <pointLight position={10, 10, 10} /> */}
-//           <pointLight position={[10, 10, 10]} />
-//           <Sphere args={[1, 32, 32]} position={[0, 0, 0]}>
-//             <meshStandardMaterial color="#3182ce" transparent opacity={0.8} />
-//           </Sphere>
-//           <OrbitControls enableZoom={false} autoRotate />
-//         </Canvas>
-//         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-//           <h1 className="text-5xl font-bold text-white drop-shadow-lg mb-4">
-//             Diabetes Awareness
-//           </h1>
-//           <p className="text-xl text-white/90 max-w-2xl mx-auto">
-//             Understanding and managing diabetes for better health outcomes
-//           </p>
-//         </div>
-//       </section>
-
-//       {/* Content Section */}
-//       <div className="max-w-7xl mx-auto px-4 py-16">
-//         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-//           <img 
-//             src="/diabetes-infographic.jpg" 
-//             alt="Diabetes Management"
-//             className="rounded-xl shadow-xl hover:scale-105 transition-transform"
-//           />
-//           <div>
-//             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-//               What is Diabetes?
-//             </h2>
-//             <p className="text-gray-600 leading-relaxed">
-//               Diabetes is a chronic metabolic disorder characterized by elevated blood sugar levels. 
-//               Our AI model analyzes 15+ factors including age, BMI, and genetic markers to assess 
-//               your risk factors and provide personalized recommendations.
-//             </p>
-//           </div>
-//         </div>
-
-//         {/* Symptoms Section */}
-//         <div className="bg-white rounded-2xl shadow-lg p-8 mb-16">
-//           <h3 className="text-2xl font-semibold text-blue-600 mb-6">
-//             Key Symptoms to Watch For
-//           </h3>
-//           <div className="grid md:grid-cols-3 gap-6">
-//             {['Increased Thirst', 'Frequent Urination', 'Blurred Vision'].map((symptom) => (
-//               <div key={symptom} className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
-//                 <span className="text-blue-600 font-medium">{symptom}</span>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* CTA Section */}
-//         <div className="text-center py-12">
-//           <button className="bg-blue-600 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
-//             Check Your Diabetes Risk
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default DiabetesPage;
-
-
-
-
-
-
-// revised by Deepseek
-
-// DiabetesPage.jsx
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import { Link } from 'react-router-dom';
+
 // Custom color theme configuration (add to tailwind.config.js)
 const themeColors = {
   richBlack: '#010B13',
@@ -158,9 +13,8 @@ const themeColors = {
 
 const DiabetesPage = () => {
   return (
-    <div className="min-h-screen bg-richBlack text-lightGray mb-[5vh] ">
-      {/* Hero Section */}
-      <section className="relative mb-[10vh] mt-[20vh] overflow-hidden" >
+    <div className="min-h-screen bg-richBlack text-lightGray mb-[5vh]   mt-[15vh] lg:mt-0 ">
+      <section className="relative mb-[10vh] mt-[5vh] overflow-hidden" >
        
 
         <motion.div 
@@ -169,7 +23,7 @@ const DiabetesPage = () => {
           className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4"
         >
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl h-[6vh] font-bold mb-6 bg-gradient-to-r from-accentTeal to-accentGold bg-clip-text text-transparent">
+            <h1 className="md:text-5xl text-4xl h-[6vh] text-wrap font-bold mb-6 bg-gradient-to-r from-accentTeal to-accentGold bg-clip-text text-transparent">
               Diabetes Intelligence
             </h1>
             <p className="text-xl text-lightGray/80 mb-8">
@@ -188,10 +42,10 @@ const DiabetesPage = () => {
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-4 ">
         {/* Info Grid */}
-        <div className="flex justify-between gap-16 items-center mb-20">
+        <div className="flex flex-col md:flex-row justify-between gap-16 items-center mb-20">
 
 
-              <div className="z-[0] w-1/2 h-[50vh] ">
+              <div className="z-[0] md:w-1/2 w-full  h-[50vh] ">
               <Canvas 
                 camera={{ position: [0, 0, 5], fov: 50 }}
                 className="w-full h-full"
@@ -235,7 +89,7 @@ const DiabetesPage = () => {
               </Canvas>
               </div>
 
-              <div className="w-1/2">
+              <div className="md:w-1/2 w-full">
                 <motion.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}

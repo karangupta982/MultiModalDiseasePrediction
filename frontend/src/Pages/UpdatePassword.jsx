@@ -31,6 +31,7 @@ function UpdatePassword() {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     const token = location.pathname.split("/").at(-1)
+    console.log("token fetched from update password: ",token)
     dispatch(resetPassword(password, confirmPassword, token, navigate))
   }
 
@@ -58,7 +59,7 @@ function UpdatePassword() {
                 value={password}
                 onChange={handleOnChange}
                 placeholder="Enter Password"
-                className="form-style w-full !pr-10"
+                className="form-style w-full !pr-10 px-[1vh] py-2 rounded-xl text-black"
               />
               <span
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -82,7 +83,7 @@ function UpdatePassword() {
                 value={confirmPassword}
                 onChange={handleOnChange}
                 placeholder="Confirm Password"
-                className="form-style w-full !pr-10"
+                className="form-style w-full !pr-10 px-[1vh] py-2 rounded-xl text-black"
               />
               <span
                 onClick={() => setShowConfirmPassword((prev) => !prev)}

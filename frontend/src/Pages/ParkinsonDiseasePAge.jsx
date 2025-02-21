@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import parkinson from '../assets/parkinson.jpg'
 import { Link } from 'react-router-dom';
+
 // const themeColors = {
 //   richBlack: '#010B13',
 //   accentPurple: '#9333EA',
@@ -12,7 +13,8 @@ import { Link } from 'react-router-dom';
 const ParkinsonDiseasePage = () => {
   return (
     <div className="min-h-screen bg-richBlack text-lightGray">
-      {/* Hero Section */}
+     
+
       <section className="relative h-[400px] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-richBlack/90 to-richBlack/50 z-0" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">

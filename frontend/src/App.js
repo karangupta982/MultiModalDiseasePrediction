@@ -32,8 +32,6 @@ import { Progressbar } from './Components/Progressbar.jsx';
 
 
 
-
-
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -56,16 +54,12 @@ function App() {
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richBlack text-white font-inter " >
         
-       
-     
+        
       <div >
       <div ref={targetRef}>
         <Navbar />
         <Routes>
-         
           <Route path="/" element={<Home />} />
-          
-
           <Route
             path="/login"
             element={
@@ -170,8 +164,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
-            
 
           <Route path="*" element={<Error />} />
         </Routes>

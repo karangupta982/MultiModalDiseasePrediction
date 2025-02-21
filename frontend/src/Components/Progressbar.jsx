@@ -38,7 +38,7 @@ export const Progressbar = ({ target }) => {
   return (
     <div className="h-[300px] bg-[#252525] fixed rounded-full top-[40%] right-1 md:right-2 lg:right-14 pr-1 lg:pr-2">
       <div 
-        className="w-1 lg:w-2 h-[50px] bg-custom-blue rounded-full absolute top-0 right-0 transform translate-y-[-50%]" 
+        className="w-1 lg:w-2 h-[50px] bg-[#12D8FA] rounded-full absolute top-0 right-0 transform translate-y-[-50%]" 
         style={{ top: `${readingProgress}%` }} 
       />
     </div>

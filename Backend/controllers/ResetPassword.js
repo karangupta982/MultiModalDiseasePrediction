@@ -33,11 +33,12 @@ export const resetPasswordToken = async (req, res) => {
     await mailSender(
       email,
       "Password Reset",
-      `Your Link for email verification is ${url}. Please click this url to reset your password.`
+      `Your Link for email verification is ${url} Please click this url to reset your password.`
     )
 
     res.json({
       success: true,
+      token:token,
       message:
         "Email Sent Successfully, Please Check Your Email to Continue Further",
     })

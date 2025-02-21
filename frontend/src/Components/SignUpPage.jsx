@@ -79,10 +79,10 @@ export default function SignUpForm() {
     email: "",
     password: "",
     confirmPassword: "",
-    gender: "",          // New field for Gender
-    dateOfBirth: "",             // New field for Date of Birth
-    disease: "",         // New field for Disease
-    allergies: "",       // New field for Allergies
+    gender: "",          
+    dateOfBirth: "",             
+    disease: "",         
+    allergies: "",       
   });
 
   const [showPassword, setShowPassword] = useState(false)
@@ -90,7 +90,7 @@ export default function SignUpForm() {
 
   // const { firstName, lastName, email, password, confirmPassword } = formData
   const { firstName, lastName, email, password, confirmPassword, gender, dateOfBirth, disease, allergies } = formData;
-  // Handle input fields, when some value changes
+ 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -124,9 +124,9 @@ export default function SignUpForm() {
       email: "",
       password: "",
       confirmPassword: "",
-      gender: "",          // New field for Gender
-      dateOfBirth: "",             // New field for Date of Birth
-      disease: "",         // New field for Disease
+      gender: "",          
+      dateOfBirth: "",             
+      disease: "",         
       allergies: "",
     })
     
@@ -138,10 +138,10 @@ export default function SignUpForm() {
     <div className="relative min-h-screen">
       <div ref={mountRef} className="absolute inset-0 z-0" />
       <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="  p-8  shadow-xl max-w-[30vw] mt-[10vh]
-h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-none bg-opacity-50 border border-gray-100
+        <div className="  p-8  shadow-xl xl:w-[30vw] md:w-[60vw] mt-[10vh] sm:w-[85vw]
+h-full  bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-none bg-opacity-50 border border-gray-100
 ">
-          <h1 className=" font-bold  text-center text-white text-4xl mb-[4vh] ">Sign Up</h1>
+          <h1 className=" font-bold  text-center text-white md:text-4xl text-2xl mb-[4vh] ">Sign Up</h1>
 
 
             <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-[2.5vh]">
@@ -149,7 +149,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
               <div className="flex gap-x-4 justify-between ">
                 <label className="w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     First Name <sup className="">*</sup>
                   </p>
                   <input
@@ -159,11 +159,11 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                     value={firstName}
                     onChange={handleOnChange}
                     placeholder="Enter first name"
-                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full text-black font-[600] text-black font-[600]"
+                    className="form-style w-full px-[1vw] py-[1vh] rounded-l-full  text-black font-[600]"
                   />
                 </label>
                 <label className="w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     Last Name <sup className="">*</sup>
                   </p>
                   <input
@@ -180,7 +180,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
 
               <label className="w-full">
-                <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                   Email Address <sup className="">*</sup>
                 </p>
                 <input
@@ -197,7 +197,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
              <div className="flex justify-between gap-x-4">
                  {/* Gender Input */}
                 <label className="w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     Gender <sup className="">*</sup>
                   </p>
                   <select
@@ -216,7 +216,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
                 {/* Date of Birth Input */}
                 <label className="w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     Date of Birth <sup className="">*</sup>
                   </p>
                   <input
@@ -232,7 +232,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
               {/* Disease Input */}
               <label className="w-full">
-                <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                   Disease <sup className="">*</sup>
                 </p>
                 <input
@@ -249,7 +249,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
               {/* Allergies Input */}
               <label className="w-full">
-                <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                   Allergies <sup className="">*</sup>
                 </p>
                 <input
@@ -265,7 +265,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
 
               <div className="flex gap-x-4">
                 <label className="relative w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     Create Password <sup className="">*</sup>
                   </p>
                   <input
@@ -289,7 +289,7 @@ h-full w-full bg-slate-800 rounded-3xl bg-clip-padding backdrop-filter backdrop-
                   </span>
                 </label>
                 <label className="relative w-full">
-                  <p className="mb-2 text-xl leading-[1.375rem] text-slate-200">
+                  <p className="mb-2 lg:text-xl text-md leading-[1.375rem] text-slate-200">
                     Confirm Password <sup className="">*</sup>
                   </p>
                   <input
