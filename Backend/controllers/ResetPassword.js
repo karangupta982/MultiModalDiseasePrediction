@@ -27,8 +27,9 @@ export const resetPasswordToken = async (req, res) => {
     )
     // console.log("DETAILS", updatedDetails)
 
-    const url = `http://localhost:3000/update-password/${token}`
-    // const url = `https://predictcareai.com/update-password/${token}`
+    const url = `https://predictcareai.vercel.app/update-password/${token}`
+    // const url = `http://localhost:3000/update-password/${token}`
+    
 
     await mailSender(
       email,
