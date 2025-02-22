@@ -4,7 +4,7 @@
 
 **Predict Care AI** is a powerful, full-stack MERN application leveraging machine learning to provide advanced healthcare insights. It features multiple disease prediction models, a medical chatbot, and an AI-powered health checkup system—empowering users to monitor their health with precision and ease.  
 
-🚀 **Live Demo:** [Frontend on Vercel](https://predictcareai.vercel.app/) | [Backend on Render](https://predictcareai.onrender.com/api)  
+🚀 **Live Demo:** [Frontend](https://predictcareai.vercel.app/) | [Backend](https://predictcareai.onrender.com/api)  
 
 ---
 
