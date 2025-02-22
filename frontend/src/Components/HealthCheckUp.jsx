@@ -104,8 +104,8 @@ const HealthAssessmentChat = () => {
                     features: newFormData
                 };
             
-                const response = await fetch("http://localhost:5000/api/predict/healthcheckup", {
-                // const response = await fetch("https://predictcareai.onrender.com/api/predict/healthcheckup", {
+                // const response = await fetch("http://localhost:5000/api/predict/healthcheckup", {
+                const response = await fetch("https://predictcareai.onrender.com/api/predict/healthcheckup", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(healthData)
