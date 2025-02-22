@@ -73,13 +73,29 @@ export const predictParkinsonDisease = async (req, res) => {
     return res.status(500).json({ error: 'Python script not found' });
   }
 
+  // const options = {
+  //   mode: 'text',
+  //   pythonPath: path.resolve('ml_env/Scripts/python.exe'),
+  //   pythonOptions: ['-u'], // Force stdout to be unbuffered
+  //   scriptPath: path.join(__dirname, '../ml_scripts'),
+  //   args: [JSON.stringify(inputFeatures)],
+  // };
+
+
+  const pythonPath = process.platform === 'win32' 
+  ? path.resolve('ml_env/Scripts/python.exe') 
+  : path.resolve('ml_env/bin/python');
+
   const options = {
     mode: 'text',
-    pythonPath: path.resolve('ml_env/Scripts/python.exe'),
+    pythonPath: pythonPath,
     pythonOptions: ['-u'], // Force stdout to be unbuffered
     scriptPath: path.join(__dirname, '../ml_scripts'),
     args: [JSON.stringify(inputFeatures)],
   };
+
+
+
 
   console.log('Starting Python script execution...');
   
