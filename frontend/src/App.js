@@ -29,6 +29,7 @@ import { useRef } from 'react';
 import DiseasePrediction from './Components/DiseasePrediction.jsx';
 import { Progressbar } from './Components/Progressbar.jsx';
 // import Loader from './Components/Loader.jsx';
+import ImageModal from './Components/ImageModal.jsx'
 
 
 
@@ -36,7 +37,7 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.profile)
-  console.log("USer from app.js",user)
+  // console.log("USer from app.js",user)
  
 
 
@@ -177,6 +178,9 @@ function App() {
 
   </div>
   );
+
+
+ 
 }
 
 export default App;

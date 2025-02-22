@@ -22,15 +22,15 @@ export function sendOtp(email, navigate) {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      console.log("calling sendotp api from backend ")
+      // console.log("calling sendotp api for backend ")
       const response = await apiConnector("POST", SENDOTP_API, {
       // const response = await apiConnector("POST","http://localhost:3000/api/v1/auth/sendotp", {
         email,
         checkUserPresent: true,
       })
-      console.log("SENDOTP API RESPONSE............", response)
+      // console.log("SENDOTP API RESPONSE............", response)
 
-      console.log(response.data.success)
+      // console.log(response.data.success)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -41,7 +41,7 @@ export function sendOtp(email, navigate) {
     } catch (error) {
       // console.log(error.message);
       // console.log("SENDOTP API ERROR............", error)
-      toast.error("Could Not Send OTP")
+      toast.error("User Exist",)
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)
@@ -78,7 +78,7 @@ export function signUp(
         otp
       })
 
-      console.log("SIGNUP API RESPONSE............", response)
+      // console.log("SIGNUP API RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -86,7 +86,7 @@ export function signUp(
       toast.success("Sign Up Successful")
       navigate("/login")
     } catch (error) {
-      console.log("SIGNUP API ERROR............", error)
+      // console.log("SIGNUP API ERROR............", error)
       toast.error("Sign Up Failed")
       navigate("/signup")
     }
@@ -105,10 +105,10 @@ export function login(email, password, navigate) {
         password,
       })
 
-      console.log("LOGIN API RESPONSE............", response)
+      // console.log("LOGIN API RESPONSE............", response)
 
       if (!response.data.success) {
-        console.log("LOGIN API ERROR............", response.data.message)
+        // console.log("LOGIN API ERROR............", response.data.message)
         throw new Error(response.data.message)
       }
 
@@ -121,7 +121,7 @@ export function login(email, password, navigate) {
       localStorage.setItem("token", JSON.stringify(response.data.token))
       navigate("/my-profile")
     } catch (error) {
-      console.log("LOGIN API ERROR............", error)
+      // console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")
     }
     dispatch(setLoading(false))
@@ -138,7 +138,7 @@ export function getPasswordResetToken(email, setEmailSent) {
         email,
       })
 
-      console.log("RESETPASSTOKEN RESPONSE............", response)
+      // console.log("RESETPASSTOKEN RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -147,7 +147,7 @@ export function getPasswordResetToken(email, setEmailSent) {
       toast.success("Reset Email Sent")
       setEmailSent(true)
     } catch (error) {
-      console.log("RESETPASSTOKEN ERROR............", error)
+      // console.log("RESETPASSTOKEN ERROR............", error)
       toast.error("Failed To Send Reset Email")
     }
     toast.dismiss(toastId)
@@ -166,7 +166,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
         token,
       })
 
-      console.log("RESETPASSWORD RESPONSE............", response)
+      // console.log("RESETPASSWORD RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -175,7 +175,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
       toast.success("Password Reset Successfully")
       navigate("/login")
     } catch (error) {
-      console.log("RESETPASSWORD ERROR............", error)
+      // console.log("RESETPASSWORD ERROR............", error)
       toast.error("Failed To Reset Password")
     }
     toast.dismiss(toastId)

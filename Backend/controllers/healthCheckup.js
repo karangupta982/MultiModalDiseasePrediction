@@ -11,15 +11,15 @@ const __dirname = path.dirname(__filename);
 export const HealthCheckup = (req, res) => {
 //   const userMessage = req.body.message;
   const userMessage = req.body;
-  console.log('User message:', userMessage);
-  console.log("inside groq controller....")
+  // console.log('User message:', userMessage);
+  // console.log("inside groq controller....")
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/healthCheckup.py');
   if (!fs.existsSync(scriptPath)) {
     console.error('Python script not found at:', scriptPath);
     return res.status(500).json({ error: 'Python script not found' });
   }
-  console.log('Script path:', scriptPath);
+  // console.log('Script path:', scriptPath);
 
   // const options = {
   //   mode: 'text',
@@ -44,7 +44,7 @@ export const HealthCheckup = (req, res) => {
 
 
 
-  console.log('Starting Python script execution...');
+  // console.log('Starting Python script execution...');
   
   const pyshell = new PythonShell('healthCheckup.py', options);
   
@@ -53,7 +53,7 @@ export const HealthCheckup = (req, res) => {
   
   // Collect stdout (only JSON results)
   pyshell.stdout.on('data', (data) => {
-    console.log('Python stdout:', data);
+    // console.log('Python stdout:', data);
     scriptOutput += data;
   });
 
@@ -72,7 +72,7 @@ export const HealthCheckup = (req, res) => {
       });
     }
     
-    console.log('Python script completed with code:', code);
+    // console.log('Python script completed with code:', code);
     try {
       if (!scriptOutput) {
         throw new Error('No output from Python script');
@@ -81,7 +81,7 @@ export const HealthCheckup = (req, res) => {
       if (response.error) {
         throw new Error(response.error);
       }
-      console.log('Parsed response:', response);
+      // console.log('Parsed response:', response);
       res.json({ 
         response: response.message,
         success: true 

@@ -10,15 +10,15 @@ const __dirname = path.dirname(__filename);
 
 export const chatController = (req, res) => {
   const userMessage = req.body.message;
-  console.log('User message:', userMessage);
-  console.log("inside groq controller....")
+  // console.log('User message:', userMessage);
+  // console.log("inside groq controller....")
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/groq_chat.py');
   if (!fs.existsSync(scriptPath)) {
     console.error('Python script not found at:', scriptPath);
     return res.status(500).json({ error: 'Python script not found' });
   }
-  console.log('Script path:', scriptPath);
+  // console.log('Script path:', scriptPath);
 
   // const options = {
   //   mode: 'text',
@@ -41,7 +41,7 @@ export const chatController = (req, res) => {
     args: [JSON.stringify(userMessage)],
   };
 
-  console.log('Starting Python script execution...');
+  // console.log('Starting Python script execution...');
   
   const pyshell = new PythonShell('groq_chat.py', options);
   
@@ -50,7 +50,7 @@ export const chatController = (req, res) => {
   
   // Collect stdout (only JSON results)
   pyshell.stdout.on('data', (data) => {
-    console.log('Python stdout:', data);
+    // console.log('Python stdout:', data);
     scriptOutput += data;
   });
 
@@ -69,7 +69,7 @@ export const chatController = (req, res) => {
       });
     }
     
-    console.log('Python script completed with code:', code);
+    // console.log('Python script completed with code:', code);
     try {
       if (!scriptOutput) {
         throw new Error('No output from Python script');
@@ -78,7 +78,7 @@ export const chatController = (req, res) => {
       if (response.error) {
         throw new Error(response.error);
       }
-      console.log('Parsed response:', response);
+      // console.log('Parsed response:', response);
       res.json({ 
         response: response.message,
         success: true 

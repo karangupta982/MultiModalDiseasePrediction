@@ -176,7 +176,7 @@ const DiseasePrediction = () => {
       switch (disease) {
         case 'diabetes':
           
-          console.log('diabetes prediction api calling');
+          // console.log('diabetes prediction api calling');
           // response = await axios.post('http://localhost:5000/api/predict/diabetes', {
           //   features: Object.values(diabetesFeatures).map(val => parseFloat(val))
           // });
@@ -187,13 +187,13 @@ const DiseasePrediction = () => {
           },{
             Authorization: `Bearer ${token}`,
           })
-          console.log("diabetes api call response",response);
+          // console.log("diabetes api call response",response);
           dispatch(setUser(response.data.updatedUserDetails))
           // console.log("diabetes prediction end consoling user",user)
 
           break;
         case 'heart':
-          console.log('heart prediction api calling');
+          // console.log('heart prediction api calling');
           // response = await axios.post('http://localhost:5000/api/predict/heart-disease', {
           //   features: Object.values(heartFeatures).map(val => parseFloat(val))
           // });
@@ -204,12 +204,12 @@ const DiseasePrediction = () => {
           },{
             Authorization: `Bearer ${token}`,
           })
-          console.log("Heart Disease api call response",response);  
+          // console.log("Heart Disease api call response",response);  
           dispatch(setUser(response.data.updatedUserDetails))
           // console.log("Heart disease prediction done end now consoling user",user)
           break;
         case 'parkinsons':
-          console.log('parkinsons prediction api calling');
+          // console.log('parkinsons prediction api calling');
           // response = await axios.post('http://localhost:5000/api/predict/parkinsons', {
           //   features: Object.values(parkinsonsFeatures).map(val => parseFloat(val))
           // });
@@ -220,7 +220,7 @@ const DiseasePrediction = () => {
           },{
             Authorization: `Bearer ${token}`,
           })
-          console.log("parkinsons disease api call response",response);
+          // console.log("parkinsons disease api call response",response);
           dispatch(setUser(response.data.updatedUserDetails))
           
           break;

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 const MedicalReports = () => {
   const [activeTab, setActiveTab] = useState("diabetes")
   const { user } = useSelector((state) => state.profile)
-  console.log("user:",user)
+  // console.log("user:",user)
 
   // Your existing reports data...
   

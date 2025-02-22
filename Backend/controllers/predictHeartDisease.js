@@ -47,17 +47,17 @@ const __dirname = path.dirname(__filename);
 export const predictHeartDisease = async (req, res) => {
   try{
   const inputFeatures = req.body.features;
-  console.log('inputFeatures:', inputFeatures);
+  // console.log('inputFeatures:', inputFeatures);
 
   const id = req.user.id;
-    console.log('User ID:', id);
+    // console.log('User ID:', id);
 
     // Fetch User & Diabetes Report
     const userDetails = await User.findById(id);
     if (!userDetails) {
       return res.status(404).json({ error: 'User not found' });
     }
-    console.log('User Details:', userDetails);
+    // console.log('User Details:', userDetails);
 
     const heartDiseaseReport = await HeartDiseaseReport.findById(userDetails.heartDiseaseReportId);
     if (!heartDiseaseReport) {
@@ -120,7 +120,7 @@ export const predictHeartDisease = async (req, res) => {
 
 
 
-  console.log('Starting Python script execution...');
+  // console.log('Starting Python script execution...');
   
   const pyshell = new PythonShell('heart_disease_prediction.py', options);
   
@@ -129,7 +129,7 @@ export const predictHeartDisease = async (req, res) => {
   
   // Collect stdout (only JSON results)
   pyshell.stdout.on('data', (data) => {
-    console.log('Python stdout:', data);
+    // console.log('Python stdout:', data);
     scriptOutput += data;
   });
 
@@ -148,7 +148,7 @@ export const predictHeartDisease = async (req, res) => {
       });
     }
     
-    console.log('Python script completed with code:', code);
+    // console.log('Python script completed with code:', code);
     try {
       if (!scriptOutput) {
         throw new Error('No output from Python script');
@@ -157,7 +157,7 @@ export const predictHeartDisease = async (req, res) => {
       if (prediction.error) {
         throw new Error(prediction.error);
       }
-      console.log('Parsed prediction:', prediction);
+      // console.log('Parsed prediction:', prediction);
 
       heartDiseaseReport.outcome = prediction.prediction;
       await heartDiseaseReport.save();  // ✅ Save the report AFTER getting the prediction

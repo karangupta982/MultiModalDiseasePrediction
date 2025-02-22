@@ -24,7 +24,7 @@ async function sendVerificationEmail(email, otp) {
   try {
     await mailSender(email, "Verification Email", emailTemplate(otp));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw error;
   }
 }

@@ -67,7 +67,7 @@ export const signup = async (req, res) => {
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
  
 
-    console.log(response);
+    // console.log(response);
     if (!response.length) {
       return res.status(400).json({
         success: false,
@@ -263,9 +263,10 @@ export const sendotp = async (req, res) => {
     const { email } = req.body;
       // console.log("email extracted from req.body",email)
       const checkUserPresent = await User.findOne({ email });
-      // console.log("email checked from database")
+      // console.log("email checked from database",checkUserPresent)
 
     if (checkUserPresent) {
+      // console.log("user already exist")
       return res.status(401).json({
         success: false,
         message: `User is Already Registered`,
@@ -278,9 +279,9 @@ export const sendotp = async (req, res) => {
       specialChars: false,
     });
     const result = await OTP.findOne({ otp: otp });
-    console.log("Result in Generate OTP Func");
-    console.log("OTP", otp);
-    console.log("Result", result);
+    // console.log("Result in Generate OTP Func");
+    // console.log("OTP", otp);
+    // console.log("Result", result);
     while (result) {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,

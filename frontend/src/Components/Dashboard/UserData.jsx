@@ -10,7 +10,7 @@ const UserProfile = () => {
 
   const {user} = useSelector((state) => state.profile)
 
-  console.log("user from userDatafile:",user);
+  // console.log("user from userDatafile:",user);
   const userData = {
     firstName: user?.firstName || "John",
     lastName: user?.lastName || "Doe",

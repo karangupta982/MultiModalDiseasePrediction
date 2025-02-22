@@ -11,17 +11,17 @@ const __dirname = path.dirname(__filename);
 export const predictDiabetes = async (req, res) => {
   try {
     const inputFeatures = req.body.features;
-    console.log('Received inputFeatures:', inputFeatures);
+    // console.log('Received inputFeatures:', inputFeatures);
 
     const id = req.user.id;
-    console.log('User ID:', id);
+    // console.log('User ID:', id);
 
     // Fetch User & Diabetes Report
     const userDetails = await User.findById(id);
     if (!userDetails) {
       return res.status(404).json({ error: 'User not found' });
     }
-    console.log('User Details:', userDetails);
+    // console.log('User Details:', userDetails);
 
     const diabetesReport = await DiabetesReportSchema.findById(userDetails.diabetesReportId);
     if (!diabetesReport) {
@@ -73,7 +73,7 @@ export const predictDiabetes = async (req, res) => {
 
 
 
-    console.log('Starting Python script execution...');
+    // console.log('Starting Python script execution...');
 
     const pyshell = new PythonShell('diabetes_prediction.py', options);
     
@@ -81,7 +81,7 @@ export const predictDiabetes = async (req, res) => {
     let scriptError = '';
 
     pyshell.stdout.on('data', (data) => {
-      console.log('Python stdout:', data);
+      // console.log('Python stdout:', data);
       scriptOutput += data;
     });
 
@@ -99,7 +99,7 @@ export const predictDiabetes = async (req, res) => {
         });
       }
 
-      console.log('Python script finished with code:', code);
+      // console.log('Python script finished with code:', code);
 
       try {
         if (!scriptOutput) {
@@ -111,7 +111,7 @@ export const predictDiabetes = async (req, res) => {
           throw new Error(prediction.error);
         }
 
-        console.log('Parsed Prediction:', prediction);
+        // console.log('Parsed Prediction:', prediction);
 
         diabetesReport.outcome = prediction.prediction;
         await diabetesReport.save();  // ✅ Save the report AFTER getting the prediction

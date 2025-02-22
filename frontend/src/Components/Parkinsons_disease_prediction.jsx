@@ -48,13 +48,13 @@ const ParkinsonsPrediction = () => {
   const predictParkinsons = async (e) => {
     e.preventDefault();
     try {
-        console.log("calling api call for Parkinsons disease prediction"); 
+        // console.log("calling api call for Parkinsons disease prediction"); 
       // const response = await axios.post('http://localhost:5000/api/predict/parkinsons', { 
       const response = await axios.post('https://predictcareai.onrender.com/api/predict/parkinsons', { 
         features: Object.values(features).map(val => parseFloat(val)) 
       });
-      console.log("response:", response);
-      console.log("actual value",response.data.prediction);
+      // console.log("response:", response);
+      // console.log("actual value",response.data.prediction);
       
       setPrediction(response.data.prediction);
       setError(null);

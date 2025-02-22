@@ -18,17 +18,17 @@ const __dirname = path.dirname(__filename);
 export const predictParkinsonDisease = async (req, res) => {
   try{
   const inputFeatures = req.body.features;
-  console.log('inputFeatures:', inputFeatures);
+  // console.log('inputFeatures:', inputFeatures);
 
     const id = req.user.id;
-    console.log('User ID:', id);
+    // console.log('User ID:', id);
 
     // Fetch User & Diabetes Report
     const userDetails = await User.findById(id);
     if (!userDetails) {
       return res.status(404).json({ error: 'User not found' });
     }
-    console.log('User Details:', userDetails);
+    // console.log('User Details:', userDetails);
 
     const parkinsonReport = await ParkinsonsDiseaseReport.findById(userDetails.parkinsonDiseaseReportId);
     if (!parkinsonReport) {
@@ -97,7 +97,7 @@ export const predictParkinsonDisease = async (req, res) => {
 
 
 
-  console.log('Starting Python script execution...');
+  // console.log('Starting Python script execution...');
   
   const pyshell = new PythonShell('parkinsons_prediction.py', options);
   
@@ -106,7 +106,7 @@ export const predictParkinsonDisease = async (req, res) => {
   
   // Collect stdout (only JSON results)
   pyshell.stdout.on('data', (data) => {
-    console.log('Python stdout:', data);
+    // console.log('Python stdout:', data);
     scriptOutput += data;
   });
 
@@ -125,7 +125,7 @@ export const predictParkinsonDisease = async (req, res) => {
         });
       }
     
-    console.log('Python script completed with code:', code);
+    // console.log('Python script completed with code:', code);
     try {
       if (!scriptOutput) {
         throw new Error('No output from Python script');
@@ -135,7 +135,7 @@ export const predictParkinsonDisease = async (req, res) => {
         throw new Error(prediction.error);
       }
 
-      console.log('Parsed prediction:', prediction);
+      // console.log('Parsed prediction:', prediction);
 
       parkinsonReport.outcome = prediction.prediction;
       await parkinsonReport.save();  // ✅ Save the report AFTER getting the prediction

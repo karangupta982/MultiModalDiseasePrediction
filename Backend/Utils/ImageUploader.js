@@ -12,6 +12,6 @@ export const uploadImageToCloudinary = async (file, folder, height, quality) => 
     options.quality = quality;
   }
   options.resource_type = "auto";
-  console.log("OPTIONS in uploading to cloudinary", options);
+  // console.log("OPTIONS in uploading to cloudinary", options);
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 };

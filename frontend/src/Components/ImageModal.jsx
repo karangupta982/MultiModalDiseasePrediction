@@ -59,13 +59,13 @@ export default function ChangeProfilePicture({setIsModalOpen}) {
   }, [imageFile])
   return (
     <div className="absolute inset-0  backdrop-blur-sm bg-richblack-900 bg-opacity-50 pt-[10vh]">
-        <div className="flex items-center justify-between w-[40vw] mx-auto rounded-t-lg bg-richblack-700 p-5">
+        <div className="flex items-center justify-between lg:w-[40vw] md:w-[60vw] w-[80vw] mx-auto rounded-t-lg bg-richblack-700 p-5">
            <p className="text-xl font-semibold text-richblack-5">Upload Photo</p>
           <button onClick={() => setIsModalOpen(false)}>
             <RxCross2 className="text-2xl text-richblack-5" />
           </button>
         </div>
-         <div className='flex items-center justify-between rounded-md border w-[40vw] mx-auto border-richblack-700 bg-richblack-800 p-8 px-2 md:px-12'>
+         <div className='flex items-center justify-between rounded-md border lg:w-[40vw] md:w-[60vw] w-[80vw] mx-auto border-richblack-700 bg-richblack-800 p-8 px-2 md:px-12'>
          
             <div className='flex gap-x-4 items-center ' >
 
@@ -96,26 +96,12 @@ export default function ChangeProfilePicture({setIsModalOpen}) {
                     disabled={loading}>
                     {
                         !loading ?
-                        <FiUpload className='text-lg text-richblack-900' />
+                        <FiUpload className='md:text-lg text-sm text-richblack-900' />
                         :
-                        <GrInProgress className='text-lg text-richblack-900' />
+                        <GrInProgress className='md:text-lg text-sm text-richblack-900' />
                     }
                     </IconBtn>
 
-                    {/* <button className="bg-richblack-600 text-richblack-50 lg:py-2 py-1 lg:px-5 px-2 font-semibold rounded-md uppercase tracking-wider"
-                    onClick={handleFileUpload}
-                    disabled={loading}
-                    >
-                    {
-                        !loading ?
-                        <FiUpload className='text-lg text-richblack-900' />
-                        :
-                        <GrInProgress className='text-lg text-richblack-900' />
-                    }
-                    {
-                        loading ? 'Uploading...' : 'Upload'
-                    }
-                    </button> */}
 
                 </div>
                 </div>
