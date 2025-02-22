@@ -88,7 +88,7 @@ export default function Home() {
                 <MessageSquare className="w-6 h-6 text-[#818cf8]" />
                 <h3 className="text-lg font-semibold text-[#f1f5f9]">AI Medical Chat</h3>
               </div>
-              <p className="text-[#94a3b8] text-sm">Intelligent medical assistant powered by fine-tuned Mistral model for personalized health guidance</p>
+              <p className="text-[#94a3b8] text-sm">Intelligent medical assistant powered by advanced model for personalized health guidance</p>
             </div>
 
             <div className="p-6 bg-gradient-to-br from-[#1e293b]/50 to-[#334155]/50 rounded-lg border border-[#475569]/30 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
