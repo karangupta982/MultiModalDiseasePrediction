@@ -181,7 +181,8 @@ const DiseasePrediction = () => {
           //   features: Object.values(diabetesFeatures).map(val => parseFloat(val))
           // });
 
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/diabetes',{
+          // response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/diabetes',{
+          response = await apiConnector("POST",'http://localhost:5000/api/predict/diabetes',{
             features: Object.values(diabetesFeatures).map(val => parseFloat(val))
           },{
             Authorization: `Bearer ${token}`,
@@ -197,7 +198,8 @@ const DiseasePrediction = () => {
           //   features: Object.values(heartFeatures).map(val => parseFloat(val))
           // });
 
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/heart-disease',{
+          response = await apiConnector("POST",'http://localhost:5000/api/predict/heart-disease',{
+          // response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/heart-disease',{
             features: Object.values(heartFeatures).map(val => parseFloat(val))
           },{
             Authorization: `Bearer ${token}`,
@@ -212,7 +214,8 @@ const DiseasePrediction = () => {
           //   features: Object.values(parkinsonsFeatures).map(val => parseFloat(val))
           // });
 
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/parkinsons',{
+          response = await apiConnector("POST",'http://localhost:5000/api/predict/parkinsons',{
+          // response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/parkinsons',{
             features: Object.values(parkinsonsFeatures).map(val => parseFloat(val))
           },{
             Authorization: `Bearer ${token}`,
@@ -669,7 +672,7 @@ const DiseasePrediction = () => {
             <div className={styles.resultSuccess}>
               <h3 className={`${styles.resultTitle} text-black`}>Analysis Results</h3>
               <p className={styles.resultText}>
-                {console.log("task",task)}
+                {/* {console.log("task",task)} */}
                 {activeTab === 'diabetes' && task==='diabetes' && (
                   prediction === 1 
                     ? '🔴 High probability of diabetes detected. Please consult a healthcare provider.' 
