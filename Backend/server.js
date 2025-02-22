@@ -35,8 +35,8 @@ cloudinaryConnect();
 
 
 app.use('/api/predict', predictionRoutes);
-app.use("/api/v1/auth", userRoutes);
-app.use("/api/v1/profile", profileRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/api/profile", profileRoutes);
 
 
 

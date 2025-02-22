@@ -1,4 +1,5 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = "https://predictcareai.onrender.com/api"
+// const BASE_URL = process.env.REACT_APP_BASE_URL
 // const BASE_URL = "api/v1"
 
 // AUTH ENDPOINTS
