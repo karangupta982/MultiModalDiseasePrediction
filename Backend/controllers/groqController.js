@@ -20,9 +20,22 @@ export const chatController = (req, res) => {
   }
   console.log('Script path:', scriptPath);
 
+  // const options = {
+  //   mode: 'text',
+  //   pythonPath: path.resolve('ml_env/Scripts/python.exe'),
+  //   pythonOptions: ['-u'], // Force stdout to be unbuffered
+  //   scriptPath: path.join(__dirname, '../ml_scripts'),
+  //   args: [JSON.stringify(userMessage)],
+  // };
+
+
+  const pythonPath = process.platform === 'win32' 
+  ? path.resolve('ml_env/Scripts/python.exe') 
+  : path.resolve('ml_env/bin/python');
+
   const options = {
     mode: 'text',
-    pythonPath: path.resolve('ml_env/Scripts/python.exe'),
+    pythonPath: pythonPath,
     pythonOptions: ['-u'], // Force stdout to be unbuffered
     scriptPath: path.join(__dirname, '../ml_scripts'),
     args: [JSON.stringify(userMessage)],
