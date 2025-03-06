@@ -240,7 +240,8 @@ def get_groq_response(message):
                     "content": f"Medical question: {message}"
                 }
             ],
-            model="mixtral-8x7b-32768",
+            model="llama-3.3-70b-versatile",
+            # model="mixtral-8x7b-32768",
             temperature=0.3,
             max_tokens=200,
             top_p=0.9

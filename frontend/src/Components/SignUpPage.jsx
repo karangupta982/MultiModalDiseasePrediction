@@ -108,7 +108,6 @@ export default function SignUpForm() {
     }
     const signupData = {
       ...formData,
-     
     }
 
     // Setting signup data to state
