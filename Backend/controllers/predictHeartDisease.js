@@ -1,37 +1,3 @@
-// const { PythonShell } = require('python-shell');
-// const path = require('path');
-
-// exports.predictHeartDisease = (req, res) => {
-//   const { features } = req.body;
-  
-//   const options = {
-//     mode: 'text',
-//     pythonPath: 'python',
-//     scriptPath: path.join(__dirname, '../ml_scripts'),
-//     args: [JSON.stringify(features)]
-//   };
-
-//   PythonShell.run('heart_disease_prediction.py', options, (err, results) => {
-//     if (err) return res.status(500).json({ error: err });
-    
-//     const prediction = JSON.parse(results[0]);
-//     res.json({ 
-//       prediction: prediction,
-//       success: true 
-//     });
-//   });
-// };
-
-
-
-
-
-
-
-// const { PythonShell } = require('python-shell');
-// const path = require('path');
-// const fs = require('fs');
-
 import {PythonShell} from 'python-shell'
 import path from 'path'
 import fs from 'fs'
@@ -90,7 +56,7 @@ export const predictHeartDisease = async (req, res) => {
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/heart_disease_prediction.py');
   if (!fs.existsSync(scriptPath)) {
-    console.error('Python script not found at:', scriptPath);
+    // console.error('Python script not found at:', scriptPath);
     return res.status(500).json({ error: 'Python script not found' });
   }
 
@@ -103,13 +69,16 @@ export const predictHeartDisease = async (req, res) => {
   // };
 
 
-  const pythonPath = process.platform === 'win32' 
-  ? path.resolve('ml_env/Scripts/python.exe') 
-  : path.resolve('ml_env/bin/python');
+  // const pythonPath = process.platform === 'win32' 
+  // ? path.resolve('ml_env/Scripts/python.exe') 
+  // : path.resolve('ml_env/bin/python');
+
+  const pythonPath = process.env.PYTHON_PATH || 'python3';
 
   const options = {
     mode: 'text',
-    pythonPath: pythonPath,
+    pythonPath: pythonPath || 'python3',
+    // pythonPath: 'python3',
     pythonOptions: ['-u'], // Force stdout to be unbuffered
     scriptPath: path.join(__dirname, '../ml_scripts'),
     args: [JSON.stringify(inputFeatures)],
@@ -136,12 +105,12 @@ export const predictHeartDisease = async (req, res) => {
   // Collect stderr (debug logs)
   pyshell.stderr.on('data', (data) => {
     scriptError += data;
-    console.error('Python stderr:', data);
+    // console.error('Python stderr:', data);
   });
 
   pyshell.end(async (err, code, signal) => {
     if (err) {
-      console.error('Python Shell Error:', err);
+      // console.error('Python Shell Error:', err);
       return res.status(500).json({ 
         error: 'Failed to execute Python script', 
         details: err.message 
@@ -176,7 +145,7 @@ export const predictHeartDisease = async (req, res) => {
         updatedUserDetails
       });
     } catch (parseError) {
-      console.error('Parsing Error:', parseError);
+      // console.error('Parsing Error:', parseError);
       heartDiseaseReport.outcome = -1;
       await heartDiseaseReport.save();  // ✅ Save even if there's an error (outcome = -1)
 
@@ -189,7 +158,7 @@ export const predictHeartDisease = async (req, res) => {
     }
   });
   }catch (error) {
-    console.error('Unexpected Error:', error);
+    // console.error('Unexpected Error:', error);
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
   

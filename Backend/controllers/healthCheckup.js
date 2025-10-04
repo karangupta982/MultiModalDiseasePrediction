@@ -30,13 +30,16 @@ export const HealthCheckup = (req, res) => {
   // };
 
 
-  const pythonPath = process.platform === 'win32' 
-  ? path.resolve('ml_env/Scripts/python.exe') 
-  : path.resolve('ml_env/bin/python');
+  // const pythonPath = process.platform === 'win32' 
+  // ? path.resolve('ml_env/Scripts/python.exe') 
+  // : path.resolve('ml_env/bin/python');
+
+  const pythonPath = process.env.PYTHON_PATH || 'python3';
 
   const options = {
     mode: 'text',
-    pythonPath: pythonPath,
+    pythonPath: pythonPath || 'python3',
+    // pythonPath: 'python3',
     pythonOptions: ['-u'], // Force stdout to be unbuffered
     scriptPath: path.join(__dirname, '../ml_scripts'),
     args: [JSON.stringify(userMessage)],
@@ -60,12 +63,12 @@ export const HealthCheckup = (req, res) => {
   // Collect stderr (debug logs)
   pyshell.stderr.on('data', (data) => {
     scriptError += data;
-    console.error('Python stderr:', data);
+    // console.error('Python stderr:', data);
   });
 
   pyshell.end((err, code, signal) => {
     if (err) {
-      console.error('Python Shell Error:', err);
+      // console.error('Python Shell Error:', err);
       return res.status(500).json({ 
         error: 'Failed to execute Python script', 
         details: err.message 
@@ -87,7 +90,7 @@ export const HealthCheckup = (req, res) => {
         success: true 
       });
     } catch (parseError) {
-      console.error('Parsing Error:', parseError);
+      // console.error('Parsing Error:', parseError);
       res.status(500).json({ 
         error: 'Failed to parse chat response', 
         details: parseError.message,
