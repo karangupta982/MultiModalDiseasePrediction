@@ -10,9 +10,6 @@ const MedicalReports = () => {
   const { user } = useSelector((state) => state.profile)
   // console.log("user:",user)
 
-  // Your existing reports data...
-  
-// "2024-03-08T12:00:00"
   const reports = {
     diabetes: {
       lastChecked: user.diabetesReportId ? (user.diabetesReportId['outcome'] === -1 ? -1: user.diabetesReportId['lastChecked']) : -1,  

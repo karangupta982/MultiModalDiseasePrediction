@@ -13,6 +13,8 @@ const DiabetesPrediction = () => {
     age: 0
   });
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const URL = BASE_URL + '/predict/diabetes';
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
 
@@ -33,8 +35,10 @@ const DiabetesPrediction = () => {
 
     try {
         // console.log("calling api call for Diabetes disease prediction"); 
-      const response = await axios.post('https://predictcareai.onrender.com/api/predict/diabetes', { 
-      // const response = await axios.post('http://localhost:5000/api/predict/diabetes', { 
+      
+      // const response = await axios.post( BASE_URL + '/predict/diabetes', { 
+      // const response = await axios.post('https://predictcareai.onrender.com/api/predict/diabetes', { 
+      const response = await axios.post(URL, { 
         features: Object.values(features) 
       });
       

@@ -6,6 +6,9 @@ const ChatComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const URL = BASE_URL + '/predict/chat';
+
     const suggestedQuestions = [
         "How can I improve my sleep quality?",
         "What are natural ways to reduce stress?",
@@ -49,7 +52,8 @@ const ChatComponent = () => {
         setIsLoading(true);
 
         try {
-            const res = await fetch('https://predictcareai.onrender.com/api/predict/chat', {
+            const res = await fetch(URL, {
+            // const res = await fetch('https://predictcareai.onrender.com/api/predict/chat', {
                 // const res = await fetch('http://localhost:5000/api/predict/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
