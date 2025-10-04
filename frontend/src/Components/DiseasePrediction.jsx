@@ -212,10 +212,6 @@ const DiseasePrediction = () => {
           // console.log("Heart disease prediction done end now consoling user",user)
           break;
         case 'parkinsons':
-          // console.log('parkinsons prediction api calling');
-          // response = await axios.post('http://localhost:5000/api/predict/parkinsons', {
-          //   features: Object.values(parkinsonsFeatures).map(val => parseFloat(val))
-          // });
 
           // response = await apiConnector("POST",'http://localhost:5000/api/predict/parkinsons',{
           response = await apiConnector("POST", BASE_URL + '/predict/parkinsons',{

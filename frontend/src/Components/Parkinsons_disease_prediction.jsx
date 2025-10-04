@@ -33,6 +33,7 @@ const ParkinsonsPrediction = () => {
       return acc;
     }, {})
   );
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
@@ -50,7 +51,8 @@ const ParkinsonsPrediction = () => {
     try {
         // console.log("calling api call for Parkinsons disease prediction"); 
       // const response = await axios.post('http://localhost:5000/api/predict/parkinsons', { 
-      const response = await axios.post('https://predictcareai.onrender.com/api/predict/parkinsons', { 
+      const response = await axios.post( BASE_URL+'/predict/parkinsons', { 
+      // const response = await axios.post('https://predictcareai.onrender.com/api/predict/parkinsons', { 
         features: Object.values(features).map(val => parseFloat(val)) 
       });
       // console.log("response:", response);
