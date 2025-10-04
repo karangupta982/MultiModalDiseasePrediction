@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+.env
+.git
+.gitignore
+Dockerfile
+README.md
+ml_env
+my_env
+
+
+npm-debug.log
+.venv
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
