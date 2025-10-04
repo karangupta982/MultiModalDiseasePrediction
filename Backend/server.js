@@ -18,8 +18,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: 'https://predictcareai.vercel.app'
+  // // origin: 'https://predictcareai.vercel.app',
   // origin: 'http://localhost:3000'
+  origin: "*",
+  credentials: true
 }));
 
 
