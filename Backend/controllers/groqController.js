@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 
 export const chatController = (req, res) => {
   const userMessage = req.body.message;
-  // console.log('User message:', userMessage);
-  // console.log("inside groq controller....")
+  console.log('User message:', userMessage);
+  console.log("inside groq controller....")
   // Check if Python script exists
   const scriptPath = path.join(__dirname, '../ml_scripts/groq_chat.py');
   if (!fs.existsSync(scriptPath)) {
@@ -29,13 +29,17 @@ export const chatController = (req, res) => {
   // };
 
 
-  const pythonPath = process.platform === 'win32' 
-  ? path.resolve('ml_env/Scripts/python.exe') 
-  : path.resolve('ml_env/bin/python');
+  // const pythonPath = process.platform === 'win32' 
+  // ? path.resolve('ml_env/Scripts/python.exe') 
+  // : path.resolve('ml_env/bin/python');
+
+
+  const pythonPath = process.env.PYTHON_PATH || 'python3';
 
   const options = {
     mode: 'text',
     pythonPath: pythonPath,
+    // pythonPath: 'python3',
     pythonOptions: ['-u'], // Force stdout to be unbuffered
     scriptPath: path.join(__dirname, '../ml_scripts'),
     args: [JSON.stringify(userMessage)],
@@ -57,12 +61,12 @@ export const chatController = (req, res) => {
   // Collect stderr (debug logs)
   pyshell.stderr.on('data', (data) => {
     scriptError += data;
-    console.error('Python stderr:', data);
+    // console.error('Python stderr:', data);
   });
 
   pyshell.end((err, code, signal) => {
     if (err) {
-      console.error('Python Shell Error:', err);
+      // console.error('Python Shell Error:', err);
       return res.status(500).json({ 
         error: 'Failed to execute Python script', 
         details: err.message 
@@ -84,7 +88,7 @@ export const chatController = (req, res) => {
         success: true 
       });
     } catch (parseError) {
-      console.error('Parsing Error:', parseError);
+      // console.error('Parsing Error:', parseError);
       res.status(500).json({ 
         error: 'Failed to parse chat response', 
         details: parseError.message,
