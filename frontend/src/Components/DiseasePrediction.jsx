@@ -79,6 +79,7 @@ const DiseasePrediction = () => {
   // const {setUser,user} = useSelector((state) => state.profile)
   const dispatch = useDispatch()
   const [task,setTask] = useState('')
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   
   // Diabetes state
   const [diabetesFeatures, setDiabetesFeatures] = useState({
@@ -181,7 +182,8 @@ const DiseasePrediction = () => {
           //   features: Object.values(diabetesFeatures).map(val => parseFloat(val))
           // });
 
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/diabetes',{
+          response = await apiConnector("POST",BASE_URL + '/predict/diabetes',{
+          // response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/diabetes',{
           // response = await apiConnector("POST",'http://localhost:5000/api/predict/diabetes',{
             features: Object.values(diabetesFeatures).map(val => parseFloat(val))
           },{
@@ -199,7 +201,8 @@ const DiseasePrediction = () => {
           // });
 
           // response = await apiConnector("POST",'http://localhost:5000/api/predict/heart-disease',{
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/heart-disease',{
+          // response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/heart-disease',{
+          response = await apiConnector("POST", BASE_URL + '/predict/heart-disease',{
             features: Object.values(heartFeatures).map(val => parseFloat(val))
           },{
             Authorization: `Bearer ${token}`,
@@ -215,7 +218,7 @@ const DiseasePrediction = () => {
           // });
 
           // response = await apiConnector("POST",'http://localhost:5000/api/predict/parkinsons',{
-          response = await apiConnector("POST",'https://predictcareai.onrender.com/api/predict/parkinsons',{
+          response = await apiConnector("POST", BASE_URL + '/predict/parkinsons',{
             features: Object.values(parkinsonsFeatures).map(val => parseFloat(val))
           },{
             Authorization: `Bearer ${token}`,

@@ -134,9 +134,3 @@ export default function Home() {
 
 }
 
-
-
-
-
-
-// shadow-[20px_-20px_50px_rgba(255,0,0,0.2),90px_-20px_50px_rgba(255,0,0,0.2),-40px_-80px_50px_rgba(255,0,0,0.4)]

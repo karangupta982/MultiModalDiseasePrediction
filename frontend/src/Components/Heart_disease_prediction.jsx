@@ -18,6 +18,7 @@ const HeartDiseasePrediction = () => {
     thalStatus: ''
   });
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
 
@@ -37,7 +38,7 @@ const HeartDiseasePrediction = () => {
 
       // console.log("calling api call for heart disease prediction"); 
       // const response = await axios.post('http://localhost:5000/api/predict/heart-disease', { 
-      const response = await axios.post('https://predictcareai.onrender.com/api/predict/heart-disease', { 
+      const response = await axios.post( BASE_URL + '/predict/heart-disease', { 
         features: inputFeatures 
       });
       

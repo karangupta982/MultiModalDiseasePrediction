@@ -8,6 +8,7 @@ const HealthAssessmentChat = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [isAssessmentComplete, setIsAssessmentComplete] = useState(false);
     
+    const  BASE_URL = process.env.REACT_APP_BASE_URL;
     const [formData, setFormData] = useState({
         age: '',
         gender: '',
@@ -105,13 +106,13 @@ const HealthAssessmentChat = () => {
                 };
             
                 // const response = await fetch("http://localhost:5000/api/predict/healthcheckup", {
-                const response = await fetch("https://predictcareai.onrender.com/api/predict/healthcheckup", {
+                const response = await fetch(BASE_URL + '/predict/healthcheckup', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(healthData)
                 });
                 const data = await response.json();
-                
+                console.log("Health assessment response:", data);
                 setMessages(prev => [...prev, { 
                     text: data.response || data.message || "Could not get assessment",
                     sender: 'bot',
