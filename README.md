@@ -60,7 +60,9 @@ CLOUDINARY_SECRET=your-api-secret
 MAIL_HOST =mail_host
 MAIL_USER =mail_user
 MAIL_PASS = mail_pass
-JWT_SECRET=jwt_secret   
+JWT_SECRET=jwt_secret
+PYTHON_PATH=ml_env\Scripts\python.exe  (for Local Development)
+PYTHON_PATH=/opt/venv/bin/python       (for Production)
 
 # Frontend  
 REACT_APP_API_URL=https://your-backend-url.com  
